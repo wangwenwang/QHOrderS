@@ -10,6 +10,9 @@
 
 @interface ViewController : UIViewController
 
+@property (strong, nonatomic) UIWebView *webView;
+
+- (void)addWebView;
 
 @end
 

@@ -10,6 +10,11 @@
 #import "AppDelegate.h"
 #import <SSZipArchive.h>
 #import "Tools.h"
+#import "XHVersion.h"
+#import <JavaScriptCore/JavaScriptCore.h>
+#import <WXApi.h>
+#import "IOSToVue.h"
+#import "LMGetLoc.h"
 
 @interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate>
 
@@ -24,9 +29,55 @@
     [super viewDidLoad];
     
     [self addWebView];
+    
+    UIImageView *imageV = [[UIImageView alloc] init];
+    
+    NSLog(@"ScreenHeight:%f", ScreenHeight);
+    NSString *imageName = @"";
+    
+    if(ScreenHeight == 480) {
+        
+        // iPhone4S
+        imageName = @"640 × 960";
+    }else if(ScreenHeight == 568){
+        
+        // iPhone5S、iPhoneSE
+        imageName = @"640 × 1136";
+    }else if(ScreenHeight == 667){
+        
+        // iPhone6、iPhone6S、iPhone7、iPhone8
+        imageName = @"750 × 1334";
+    }else if(ScreenHeight == 736){
+        
+        // iPhone6P、iPhone6SP、iPhone7P、iPhone8P
+        imageName = @"1242 × 2208";
+    }else if(ScreenHeight == 812){
+        
+        // iPhoneX、iPhoneXS
+        imageName = @"1125 × 2436";
+    }else {
+        
+        // iPhoneXR、iPhoneXSMAX
+        imageName = @"1125 × 2436";
+        [Tools showAlert:self.view andTitle:@"未知设备" andTime:5];
+    }
+    
+    [imageV setImage:[UIImage imageNamed:imageName]];
+    [imageV setFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    [self.view addSubview:imageV];
+    
+    [UIView animateWithDuration:0.8 delay:0.8 options:0 animations:^{
+        
+        [imageV setAlpha:0];
+    } completion:^(BOOL finished) {
+        
+        [imageV removeFromSuperview];
+    }];
 }
 
+
 #pragma mark GET方法
+
 - (void)addWebView {
     
     if(_webView == nil) {
@@ -42,7 +93,7 @@
         // 长按5秒，开启webview编辑模式
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
         longPress.delegate = self;
-        longPress.minimumPressDuration = 3;
+        longPress.minimumPressDuration = 2;
         [_webView addGestureRecognizer:longPress];
         
         NSString *unzipPath = [Tools getUnzipPath];
@@ -91,6 +142,176 @@
             }
         }
     }
+}
+
+
+#pragma mark - UIWebViewDelegate
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
+    [Tools closeWebviewEdit:_webView];
+}
+
+
+// webViewDidFinishLoad方法晚于vue的mounted函数 0.3秒左右，不采用
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+    
+    __weak __typeof(self)weakSelf = self;
+    
+    // iOS监听vue的函数
+    JSContext *context = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    context[@"CallAndroidOrIOS"] = ^() {
+        NSString * first = @"";
+        NSString * second = @"";
+        NSString * third = @"";
+        NSString * fourth = @"";
+        NSArray *args = [JSContext currentArguments];
+        for (JSValue *jsVal in args) {
+            first = jsVal.toString;
+            break;
+        }
+        @try {
+            JSValue *jsVal = args[1];
+            second = jsVal.toString;
+        } @catch (NSException *exception) { }
+        @try {
+            JSValue *jsVal = args[2];
+            third = jsVal.toString;
+        } @catch (NSException *exception) { }
+        @try {
+            JSValue *jsVal = args[3];
+            fourth = jsVal.toString;
+        } @catch (NSException *exception) { }
+        
+        if([first isEqualToString:@"微信登录"]) {
+            
+            SendAuthReq* req = [[SendAuthReq alloc] init];
+            req.scope = @"snsapi_userinfo";
+            req.state = @"wechat_sdk_tms";
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [WXApi sendReq:req];
+            });
+        }
+        // 第一次加载登录页，不执行此函数，所以还写了一个定时器
+        else if([first isEqualToString:@"登录页面已加载"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"weixin://"]] || [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Whatapp://"]] || [WXApi isWXAppInstalled]) {
+                    
+                    // 微信
+                    NSLog(@"设备已安装【微信】");
+                }else {
+                    
+                    // 移除微信按钮
+                    [IOSToVue TellVueWXInstall_Check_Ajax:weakSelf.webView andIsInstall:@"NO"];
+                }
+            });
+            
+            // 发送APP版本号
+            [IOSToVue TellVueVersionShow:weakSelf.webView andVersion:[NSString stringWithFormat:@"版本:%@", [Tools getCFBundleShortVersionString]]];
+            
+            // 发送设备标识
+            [IOSToVue TellVueDevice:weakSelf.webView andDevice:@"iOS"];
+        }
+        // 导航
+        else if([first isEqualToString:@"导航"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+//                [self doNavigationWithEndLocation:second];
+            });
+        }
+        // 查看路线
+        else if([first isEqualToString:@"查看路线"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+//                [self showLocLine:second andShipmentCode:third andShipmentStatus:fourth];
+            });
+        }
+        // 服务器地址
+        else if([first isEqualToString:@"服务器地址"]) {
+            
+            [Tools setServerAddress:second];
+        }
+        // 记住帐号密码，开始定位
+        else if([first isEqualToString:@"记住帐号密码"]) {
+            
+//            if(!_service) {
+//                _service = [[ServiceTools alloc] init];
+//            }
+//            _service.delegate = self;
+            
+            // 检查更新
+            [XHVersion checkNewVersion];
+        }
+        // 获取当前位置页面已加载，预留接口，防止js获取当前位置出问题
+        else if([first isEqualToString:@"获取当前位置页面已加载"]) {
+            
+            [[[LMGetLoc alloc] init] startLoc:^(NSString * _Nonnull address, double lng, double lat) {
+                
+                [IOSToVue TellVueCurrAddress:webView andAddress:address andLng:lng andLat:lat];
+            }];
+        }
+        // 检查更新
+        else if([first isEqualToString:@"检查版本更新"]) {
+            
+            // 检查更新
+            [XHVersion checkNewVersion];
+            
+            // 2.如果你需要自定义提示框,请使用下面方法
+            [XHVersion checkNewVersionAndCustomAlert:^(XHAppInfo *appInfo) {
+                
+                NSLog(@"新版本信息:\n 版本号 = %@ \n 更新时间 = %@\n 更新日志 = %@ \n 在AppStore中链接 = %@\n AppId = %@ \n bundleId = %@" ,appInfo.version,appInfo.currentVersionReleaseDate,appInfo.releaseNotes,appInfo.trackViewUrl,appInfo.trackId,appInfo.bundleId);
+            } andNoNewVersionBlock:^(XHAppInfo *appInfo) {
+                
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"已经是最新版本" message:@"" delegate:self cancelButtonTitle:@"确定", nil];
+                [alertView show];
+#endif
+                
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"已经是最新版本" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                }]];
+                [self presentViewController:alert animated:YES completion:nil];
+#endif
+            }];
+        }
+        NSLog(@"js传ios：%@   %@   %@   %@",first, second, third, fourth);
+    };
+}
+
+
+#pragma mark 长按手势事件
+
+-(void)longPress:(UILongPressGestureRecognizer *)sender{
+    
+    __weak __typeof(self)weakSelf = self;
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        
+        NSLog(@"打开编辑模式");
+        [Tools openWebviewEdit:_webView];
+        
+        // 开启编辑模式后30秒将关闭
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            usleep(30 * 1000000);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSLog(@"关闭编辑模式");
+                [Tools closeWebviewEdit:weakSelf.webView];
+            });
+        });
+    }
+}
+
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    
+    return YES;
 }
 
 @end

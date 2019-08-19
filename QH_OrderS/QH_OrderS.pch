@@ -10,23 +10,17 @@
 #define QH_OrderS_pch
 
 /*--------- import ---------*/
-#import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
-#import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
-#import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入检索功能所有的头文件
-#import <BaiduMapAPI_Cloud/BMKCloudSearchComponent.h>//引入云检索功能所有的头文件
-#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
-#import <BaiduMapAPI_Utils/BMKUtilsComponent.h>//引入计算工具所有的头文件
-#import <BaiduMapAPI_Radar/BMKRadarComponent.h>//引入周边雷达功能所有的头文件
-#import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
 
 
 #endif /* tms_ios_Prefix_pch */
+
+#define WeakSelf __weak typeof(self) weakSelf = self;
 
 #define kReceive_WebView_Notification @"Receive_WebView_Notification"
 
 #define kUserDefaults_ZipVersion_local_key @"ZipVersion"
 
-#define kUserDefaults_ZipVersion_local_defaultValue @"0.4.5"
+#define kUserDefaults_ZipVersion_local_defaultValue @"0.0.1"
 
 #define kUserDefaults_Server_Address_key @"ServerAddress"
 
@@ -76,11 +70,11 @@
 
 
 // 微信AppID
-#define WXAPPID @"wx011d8094226f8fbc"
+#define WXAPPID @"wxaf790dccfef7e418"
 
 
 // 微信AppSecret
-#define WXAPPSECRED @"2acb3abc7ecdb074960ac039742d60fe"
+#define WXAPPSECRED @"661f2419320b798dcd8e794f35d71a5e"
 
 
 // 反地理编码函数，上传位置点

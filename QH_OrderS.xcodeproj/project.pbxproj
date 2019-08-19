@@ -3,26 +3,28 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B04E18422DD755E005840FC /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B04E18322DD755E005840FC /* dist.zip */; };
 		3B04E18622DD757F005840FC /* Default-568@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B04E18522DD757F005840FC /* Default-568@2x.png */; };
-		3B04E18A22DD9DA7005840FC /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04E18822DD9DA7005840FC /* Tools.m */; };
-		3B04E19822DD9DE9005840FC /* LMProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04E18C22DD9DE9005840FC /* LMProgressView.m */; };
 		3B04E19922DD9DE9005840FC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04E18F22DD9DE9005840FC /* Reachability.m */; };
 		3B04E19A22DD9DE9005840FC /* XHVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04E19322DD9DE9005840FC /* XHVersion.m */; };
 		3B04E19B22DD9DE9005840FC /* XHAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04E19422DD9DE9005840FC /* XHAppInfo.m */; };
 		3B04E19C22DD9DE9005840FC /* XHVersionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04E19522DD9DE9005840FC /* XHVersionRequest.m */; };
 		3B297DBE22DD6D750028847C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B297DBD22DD6D750028847C /* AppDelegate.m */; };
 		3B297DC122DD6D750028847C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B297DC022DD6D750028847C /* ViewController.m */; };
-		3B297DC422DD6D760028847C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B297DC222DD6D760028847C /* Main.storyboard */; };
 		3B297DC622DD6D760028847C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B297DC522DD6D760028847C /* Assets.xcassets */; };
 		3B297DC922DD6D760028847C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B297DC722DD6D760028847C /* LaunchScreen.storyboard */; };
 		3B297DCC22DD6D760028847C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B297DCB22DD6D760028847C /* main.m */; };
 		3B297DD622DD6D760028847C /* QH_OrderSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B297DD522DD6D760028847C /* QH_OrderSTests.m */; };
 		3B297DE122DD6D760028847C /* QH_OrderSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B297DE022DD6D760028847C /* QH_OrderSUITests.m */; };
+		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
+		3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284A22F432AF009FCAF8 /* IOSToVue.m */; };
+		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
+		3BD20FA4230A9E73001A52A4 /* ServiceTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD20FA2230A9E73001A52A4 /* ServiceTools.m */; };
+		3BD20FA6230ABB60001A52A4 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3BD20FA5230ABB60001A52A4 /* dist.zip */; };
+		3BD20FAC230AC9CE001A52A4 /* BMKLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */; };
 		9CFB11A5FB77436ED36CDE93 /* libPods-QH_OrderS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DA69FEE1BB9777B55ADB628 /* libPods-QH_OrderS.a */; };
 /* End PBXBuildFile section */
 
@@ -44,13 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3B04E18322DD755E005840FC /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3B04E18522DD757F005840FC /* Default-568@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568@2x.png"; sourceTree = "<group>"; };
 		3B04E18722DD778B005840FC /* QH_OrderS.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QH_OrderS.pch; sourceTree = "<group>"; };
-		3B04E18822DD9DA7005840FC /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
-		3B04E18922DD9DA7005840FC /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
-		3B04E18C22DD9DE9005840FC /* LMProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMProgressView.m; sourceTree = "<group>"; };
-		3B04E18D22DD9DE9005840FC /* LMProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMProgressView.h; sourceTree = "<group>"; };
 		3B04E18F22DD9DE9005840FC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3B04E19022DD9DE9005840FC /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3B04E19222DD9DE9005840FC /* XHVersionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHVersionRequest.h; sourceTree = "<group>"; };
@@ -64,7 +61,6 @@
 		3B297DBD22DD6D750028847C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3B297DBF22DD6D750028847C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3B297DC022DD6D750028847C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3B297DC322DD6D760028847C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3B297DC522DD6D760028847C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B297DC822DD6D760028847C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B297DCA22DD6D760028847C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +72,16 @@
 		3B297DE022DD6D760028847C /* QH_OrderSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QH_OrderSUITests.m; sourceTree = "<group>"; };
 		3B297DE222DD6D760028847C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B54E9EF800DFD786F5143B1 /* Pods-QH_OrderS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QH_OrderS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS.debug.xcconfig"; sourceTree = "<group>"; };
+		3B79284922F432AF009FCAF8 /* LMGetLoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGetLoc.m; sourceTree = "<group>"; };
+		3B79284A22F432AF009FCAF8 /* IOSToVue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOSToVue.m; sourceTree = "<group>"; };
+		3B79284B22F432AF009FCAF8 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		3B79284C22F432AF009FCAF8 /* IOSToVue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSToVue.h; sourceTree = "<group>"; };
+		3B79284D22F432AF009FCAF8 /* LMGetLoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGetLoc.h; sourceTree = "<group>"; };
+		3B79284E22F432AF009FCAF8 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		3BD20FA2230A9E73001A52A4 /* ServiceTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTools.m; sourceTree = "<group>"; };
+		3BD20FA3230A9E73001A52A4 /* ServiceTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTools.h; sourceTree = "<group>"; };
+		3BD20FA5230ABB60001A52A4 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
+		3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BMKLocationKit.framework; sourceTree = "<group>"; };
 		7DA69FEE1BB9777B55ADB628 /* libPods-QH_OrderS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QH_OrderS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9891314D5E289145FAAB882 /* Pods-QH_OrderS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QH_OrderS.release.xcconfig"; path = "Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CFB11A5FB77436ED36CDE93 /* libPods-QH_OrderS.a in Frameworks */,
+				3BD20FAC230AC9CE001A52A4 /* BMKLocationKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,8 +116,6 @@
 		3B04E18B22DD9DE9005840FC /* Third */ = {
 			isa = PBXGroup;
 			children = (
-				3B04E18C22DD9DE9005840FC /* LMProgressView.m */,
-				3B04E18D22DD9DE9005840FC /* LMProgressView.h */,
 				3B04E18E22DD9DE9005840FC /* Reachability */,
 				3B04E19122DD9DE9005840FC /* XHVersion */,
 			);
@@ -139,13 +144,6 @@
 			path = XHVersion;
 			sourceTree = "<group>";
 		};
-		3B04E19D22DDB84D005840FC /* Custum */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Custum;
-			sourceTree = "<group>";
-		};
 		3B297DB022DD6D750028847C = {
 			isa = PBXGroup;
 			children = (
@@ -171,22 +169,21 @@
 		3B297DBB22DD6D750028847C /* QH_OrderS */ = {
 			isa = PBXGroup;
 			children = (
-				3B04E18322DD755E005840FC /* dist.zip */,
+				3BD20FA5230ABB60001A52A4 /* dist.zip */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
-				3B04E19D22DDB84D005840FC /* Custum */,
+				3BD20FA1230A9E73001A52A4 /* Service */,
+				3B79284822F432AF009FCAF8 /* Tools */,
 				3B04E18B22DD9DE9005840FC /* Third */,
 				3B297DBC22DD6D750028847C /* AppDelegate.h */,
 				3B297DBD22DD6D750028847C /* AppDelegate.m */,
 				3B297DBF22DD6D750028847C /* ViewController.h */,
 				3B297DC022DD6D750028847C /* ViewController.m */,
-				3B297DC222DD6D760028847C /* Main.storyboard */,
-				3B04E18922DD9DA7005840FC /* Tools.h */,
-				3B04E18822DD9DA7005840FC /* Tools.m */,
 				3B297DC522DD6D760028847C /* Assets.xcassets */,
 				3B297DC722DD6D760028847C /* LaunchScreen.storyboard */,
 				3B297DCA22DD6D760028847C /* Info.plist */,
 				3B297DCB22DD6D760028847C /* main.m */,
 				3B04E18722DD778B005840FC /* QH_OrderS.pch */,
+				3BD20FAA230AC9CE001A52A4 /* libs */,
 			);
 			path = QH_OrderS;
 			sourceTree = "<group>";
@@ -207,6 +204,36 @@
 				3B297DE222DD6D760028847C /* Info.plist */,
 			);
 			path = QH_OrderSUITests;
+			sourceTree = "<group>";
+		};
+		3B79284822F432AF009FCAF8 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				3B79284E22F432AF009FCAF8 /* Tools.h */,
+				3B79284B22F432AF009FCAF8 /* Tools.m */,
+				3B79284D22F432AF009FCAF8 /* LMGetLoc.h */,
+				3B79284922F432AF009FCAF8 /* LMGetLoc.m */,
+				3B79284C22F432AF009FCAF8 /* IOSToVue.h */,
+				3B79284A22F432AF009FCAF8 /* IOSToVue.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		3BD20FA1230A9E73001A52A4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				3BD20FA2230A9E73001A52A4 /* ServiceTools.m */,
+				3BD20FA3230A9E73001A52A4 /* ServiceTools.h */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		3BD20FAA230AC9CE001A52A4 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */,
+			);
+			path = libs;
 			sourceTree = "<group>";
 		};
 		514E8D55CD784956C1D5D71F /* Frameworks */ = {
@@ -237,7 +264,7 @@
 				3B297DB522DD6D750028847C /* Sources */,
 				3B297DB622DD6D750028847C /* Frameworks */,
 				3B297DB722DD6D750028847C /* Resources */,
-				59D29CF88BF182EC8E5F7F43 /* [CP] Copy Pods Resources */,
+				2CD8C234D09C3D036E4DFDF4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -332,9 +359,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B297DC922DD6D760028847C /* LaunchScreen.storyboard in Resources */,
-				3B04E18422DD755E005840FC /* dist.zip in Resources */,
+				3BD20FA6230ABB60001A52A4 /* dist.zip in Resources */,
 				3B297DC622DD6D760028847C /* Assets.xcassets in Resources */,
-				3B297DC422DD6D760028847C /* Main.storyboard in Resources */,
 				3B04E18622DD757F005840FC /* Default-568@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,22 +382,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		59D29CF88BF182EC8E5F7F43 /* [CP] Copy Pods Resources */ = {
+		2CD8C234D09C3D036E4DFDF4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources.sh",
-				"${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/mapapi.bundle",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/mapapi.bundle",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A0342DB05CF03F91538C7457 /* [CP] Check Pods Manifest.lock */ = {
@@ -399,15 +424,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B04E19822DD9DE9005840FC /* LMProgressView.m in Sources */,
+				3BD20FA4230A9E73001A52A4 /* ServiceTools.m in Sources */,
 				3B04E19A22DD9DE9005840FC /* XHVersion.m in Sources */,
+				3B79285122F432AF009FCAF8 /* Tools.m in Sources */,
 				3B297DC122DD6D750028847C /* ViewController.m in Sources */,
 				3B04E19C22DD9DE9005840FC /* XHVersionRequest.m in Sources */,
 				3B04E19B22DD9DE9005840FC /* XHAppInfo.m in Sources */,
+				3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */,
+				3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */,
 				3B297DCC22DD6D760028847C /* main.m in Sources */,
 				3B297DBE22DD6D750028847C /* AppDelegate.m in Sources */,
 				3B04E19922DD9DE9005840FC /* Reachability.m in Sources */,
-				3B04E18A22DD9DA7005840FC /* Tools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,14 +470,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3B297DC222DD6D760028847C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3B297DC322DD6D760028847C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3B297DC722DD6D760028847C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -583,6 +602,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AP5995A5FC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/QH_OrderS/libs",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = QH_OrderS/QH_OrderS.pch;
 				INFOPLIST_FILE = QH_OrderS/Info.plist;
@@ -593,7 +616,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaidongyuan.QHOrderS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -604,6 +627,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AP5995A5FC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/QH_OrderS/libs",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = QH_OrderS/QH_OrderS.pch;
 				INFOPLIST_FILE = QH_OrderS/Info.plist;
@@ -614,7 +641,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaidongyuan.QHOrderS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

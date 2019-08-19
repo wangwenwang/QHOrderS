@@ -7,4 +7,5 @@ pod 'MBProgressHUD', '~> 1.0.0'
 pod 'WechatOpenSDK'
 pod 'AFNetworking', '~> 3.0'
 pod 'BaiduMapKit'
+pod 'LMProgressView'
 end

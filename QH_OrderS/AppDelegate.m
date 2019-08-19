@@ -8,8 +8,17 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "ServiceTools.h"
+#import <WXApi.h>
+#import "Tools.h"
+#import <SSZipArchive.h>
+#import <LMProgressView.h>
 
-@interface AppDelegate ()
+@interface AppDelegate ()<ServiceToolsDelegate>
+
+@property (nonatomic, strong)UIView *downView;
+
+@property (nonatomic, strong)LMProgressView *progressView;
 
 @end
 
@@ -24,35 +33,138 @@
     _window.rootViewController = mainView;
     [_window makeKeyAndVisible];
     
+    // 注册微信凭证
+    BOOL b = [WXApi registerApp:WXAPPID];
+    
+    if(b) { NSLog(@"微信注册成功");}
+    else  { NSLog(@"微信注册失败");}
+    
+    // 检查HTML zip 是否有更新
+    [self checkZipVersion];
+    
     return YES;
 }
 
 
+- (void)checkZipVersion {
+    
+    NSString *currVersion = [Tools getZipVersion];
+    if(currVersion == nil) {
+        NSLog(@"初次检查zip版本，设置默认");
+        [Tools setZipVersion:kUserDefaults_ZipVersion_local_defaultValue];
+    }else{
+        NSLog(@"本地zip版本：%@", currVersion);
+    }
+    
+    ServiceTools *s = [[ServiceTools alloc] init];
+    s.delegate = self;
+    UIViewController *rootViewController = _window.rootViewController;
+    if([rootViewController isKindOfClass:[ViewController class]]) {
+        
+        [s queryAppVersion];
+    }
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    
 }
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
 }
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
 }
 
 
+#pragma mark - ServiceToolsDelegate
+
+// 开始下载zip
+- (void)downloadStart {
+    
+    if(!_downView) {
+        _downView = [[UIView alloc] init];
+    }
+    [_downView setFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    [_downView setBackgroundColor:RGB(145, 201, 249)];
+    [_window addSubview:_downView];
+    
+    _progressView = [[LMProgressView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_window.frame), CGRectGetHeight(_window.frame))];
+    [_downView addSubview:_progressView];
+}
+
+// 下载zip进度
+- (void)downloadProgress:(double)progress {
+    
+    WeakSelf;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        weakSelf.progressView.progress = progress;
+    });
+}
+
+// 下载zip完成
+- (void)downloadCompletion:(NSString *)version andFilePath:(NSString *)filePath {
+    
+    WeakSelf;
+    
+    NSLog(@"解压中...");
+    NSString *unzipPath = [Tools getUnzipPath];
+    BOOL unzip_b = [SSZipArchive unzipFileAtPath:filePath toDestination:unzipPath];
+    if(unzip_b) {
+        
+        NSLog(@"解压完成，开始刷新APP内容...");
+    }else {
+        
+        NSLog(@"解压失败");
+    }
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSLog(@"延迟0.5秒");
+        usleep(500000);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            UIViewController *rootViewController = [Tools getRootViewController];
+            if([rootViewController isKindOfClass:[ViewController class]]) {
+                
+                ViewController *vc = (ViewController *)rootViewController;
+                [vc addWebView];
+            }
+            
+            [UIView animateWithDuration:0.2 animations:^{
+                
+                weakSelf.downView.alpha = 0.0f;
+            }completion:^(BOOL finished){
+                
+                [weakSelf.downView removeFromSuperview];
+                if(unzip_b) {
+                    
+                    [Tools setZipVersion:version];
+                }else {
+                    
+                    NSLog(@"zip解压失败，不更新zip版本号");
+                }
+            }];
+            NSLog(@"刷新内容完成");
+        });
+    });
+}
+              
 @end

@@ -15,6 +15,8 @@
 #import <WXApi.h>
 #import "IOSToVue.h"
 #import "LMGetLoc.h"
+#import "CheckOrderPathViewController.h"
+#import "LMViewController.h"
 
 @interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate>
 
@@ -225,10 +227,13 @@
         // 查看路线
         else if([first isEqualToString:@"查看路线"]) {
             
-            dispatch_async(dispatch_get_main_queue(), ^{
+//            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+                dispatch_async(dispatch_get_main_queue(), ^{
                 
-//                [self showLocLine:second andShipmentCode:third andShipmentStatus:fourth];
-            });
+                    [weakSelf showLocLine:second andShipmentCode:third andShipmentStatus:fourth];
+                });
+//            });
         }
         // 服务器地址
         else if([first isEqualToString:@"服务器地址"]) {
@@ -312,6 +317,16 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
     return YES;
+}
+
+// 查看路线
+- (void)showLocLine:(NSString *)shipmentId andShipmentCode:(NSString *)shipmentCode andShipmentStatus:(NSString *)shipmentStatus {
+    
+    CheckOrderPathViewController *vc = [[CheckOrderPathViewController alloc] init];
+    vc.orderIDX = shipmentId;
+    vc.shipmentCode = shipmentCode;
+    vc.shipmentStatus = shipmentStatus;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end

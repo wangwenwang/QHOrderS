@@ -52,13 +52,6 @@ typedef enum {
     BMKSwitchIndoorFloorNotExist,        /// 当前室内图不存在该楼层
 } BMKSwitchIndoorFloorError;
 
-///枚举：地图区域改变原因
-typedef enum {
-    BMKRegionChangeReasonGesture = 0,     /// 手势触发导致地图区域变化，如双击、拖拽、滑动地图
-    BMKRegionChangeReasonEvent,        /// 地图上控件事件，如点击指南针返回2D地图。
-    BMKRegionChangeReasonAPIs,      /// 开发者调用接口、设置地图参数等导致地图区域变化
-} BMKRegionChangeReason;
-
 ///地图View类，使用此View可以显示地图窗口，并且对地图进行相关的操作
 @interface BMKMapView : UIView
 
@@ -82,7 +75,7 @@ typedef enum {
 /// 当前地图的中心点，改变该值时，地图的比例尺级别不会发生变化
 @property (nonatomic) CLLocationCoordinate2D centerCoordinate;
 
-/// 地图比例尺级别，在手机上当前可使用的级别为4-21级
+/// 地图比例尺级别，在手机上当前可使用的级别为3-21级
 @property (nonatomic) float zoomLevel;
 /// 地图的自定义最小比例尺级别
 @property (nonatomic) float minZoomLevel;
@@ -94,9 +87,6 @@ typedef enum {
 
 /// 地图俯视角度，在手机上当前可使用的范围为－45～0度
 @property (nonatomic) int overlooking;
-/// 地图俯视角度最小值（即角度最大值），在手机上当前可设置的范围为-45～0度
-@property (nonatomic) int minOverlooking;
-
 ///设定地图是否现显示3D楼块效果
 @property(nonatomic, getter=isBuildingsEnabled) BOOL buildingsEnabled;
 ///设定地图是否显示底图poi标注(不包含室内图标注)，默认YES
@@ -146,20 +136,10 @@ typedef enum {
 ///设置mapPadding时，地图中心(屏幕坐标：BMKMapStatus.targetScreenPt)是否跟着改变，默认YES
 @property (nonatomic) BOOL updateTargetScreenPtWhenMapPaddingChanged;
 
-/**
- 设定双指手势操作时，BMKMapView的旋转和缩放效果的中心点。
- 设置为YES时，以手势的中心点（二个指头的中心点）为中心进行旋转和缩放，地图中心点会改变；
- 设置为NO时，以当前地图的中心点为中心进行旋转和缩放，地图中心点不变；
- 默认值为NO。
- */
+///设定地图View能否支持以手势中心点为轴进行旋转和缩放
 @property(nonatomic, getter=isChangeWithTouchPointCenterEnabled) BOOL ChangeWithTouchPointCenterEnabled;
 
-/**
- 设定双击手势放大地图时，BMKMapView的放大效果的中心点。
- 设置为YES时，以双击的位置为中心点进行放大，地图中心点会改变；
- 设置为NO时，以当前地图的中心点为中心进行放大，地图中心点不变；
- 默认值为YES。
- */
+///双击手势放大地图时, 设置为YES, 地图中心点移动至点击处; 设置为NO，地图中心点不变；默认为YES;
 @property(nonatomic, getter=isChangeCenterWithDoubleTouchPointEnabled) BOOL ChangeCenterWithDoubleTouchPointEnabled;
 
 /**
@@ -173,17 +153,6 @@ typedef enum {
  *@param enable 自定义地图样式是否生效
  */
 + (void)enableCustomMapStyle:(BOOL) enable;
-
-/**
- 自定义路况颜色。注意：如果需要自定义路况颜色，必须4种路况全都设置。4个参数全部合法时，自定义颜色才有效；否则全部使用默认的。
- 
- @param smooth 路况畅通对应的颜色
- @param slow 路况缓行对应的颜色
- @param congestion 路况拥堵对应的颜色
- @param severeCongestion 路况严重拥堵对应的颜色
- @return 自定义颜色合法返回true，非法返回false
- */
-- (BOOL)setCustomTrafficColorForSmooth:(UIColor *)smooth slow:(UIColor *)slow congestion:(UIColor *)congestion severeCongestion:(UIColor *)severeCongestion;
 
 /**
  * 2.10.0起废弃，空实现，逻辑由地图SDK控制
@@ -225,9 +194,11 @@ typedef enum {
 - (BOOL)zoomOut;
 
 /**
- * 此接口什么都没做，已废弃。
+ *根据当前地图View的窗口大小调整传入的region，返回适合当前地图窗口显示的region，调整过程会保证中心点不改变
+ *@param region 待调整的经纬度范围
+ *@return 调整后适合当前地图窗口显示的经纬度范围
  */
-- (BMKCoordinateRegion)regionThatFits:(BMKCoordinateRegion)region __deprecated_msg("此方法已废弃");
+- (BMKCoordinateRegion)regionThatFits:(BMKCoordinateRegion)region;
 
 /**
  *设定当前地图的显示范围
@@ -269,9 +240,11 @@ typedef enum {
 - (void)setVisibleMapRect:(BMKMapRect)mapRect animated:(BOOL)animate;
 
 /**
- *此方法什么都没做，已废弃。
+ *根据当前地图View的窗口大小调整传入的mapRect，返回适合当前地图窗口显示的mapRect，调整过程会保证中心点不改变
+ *@param mapRect 待调整的地理范围，采用直角坐标系表示
+ *@return 调整后适合当前地图窗口显示的地理范围，采用直角坐标系
  */
-- (BMKMapRect)mapRectThatFits:(BMKMapRect)mapRect __deprecated_msg("此方法已废弃");
+- (BMKMapRect)mapRectThatFits:(BMKMapRect)mapRect;
 
 /**
  *设定地图的显示范围,并使mapRect四周保留insets指定的边界区域
@@ -367,15 +340,6 @@ typedef enum {
 - (void)setMapCenterToScreenPt:(CGPoint)ptInScreen;
 
 /**
- 根据地理经纬度范围和边距计算BMKMapStatus
-
- @param region 地理范围
- @param insets 边距
- @return BMKMapStatus
- */
-- (BMKMapStatus *)getMapStatusFromCoordinateRegion:(BMKCoordinateRegion)region edgePadding:(UIEdgeInsets)insets;
-
-/**
  * 获取地图状态
   *@return 返回地图状态信息
  */
@@ -455,7 +419,7 @@ typedef enum {
  *动态更新我的位置数据
  *	@param	[in]	userLocation	定位数据
  */
--(void)updateLocationData:(BMKUserLocation *)userLocation;
+-(void)updateLocationData:(BMKUserLocation*)userLocation;
 @end
 
 @interface BMKMapView (AnnotationAPI)
@@ -645,27 +609,11 @@ typedef enum {
 - (void)mapView:(BMKMapView *)mapView regionWillChangeAnimated:(BOOL)animated;
 
 /**
- *地图区域即将改变时会调用此接口
- *@param mapView 地图View
- *@param animated 是否动画
- *@param reason 地区区域改变的原因
- */
-- (void)mapView:(BMKMapView *)mapView regionWillChangeAnimated:(BOOL)animated reason:(BMKRegionChangeReason)reason;
-
-/**
  *地图区域改变完成后会调用此接口
  *@param mapView 地图View
  *@param animated 是否动画
  */
 - (void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated;
-
-/**
- *地图区域改变完成后会调用此接口
- *@param mapView 地图View
- *@param animated 是否动画
- *@param reason 地区区域改变的原因
- */
-- (void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated reason:(BMKRegionChangeReason)reason;
 
 /**
  *根据anntation生成对应的View
@@ -683,17 +631,7 @@ typedef enum {
 - (void)mapView:(BMKMapView *)mapView didAddAnnotationViews:(NSArray *)views;
 
 /**
- *当点击一个annotation view时，调用此接口
- *每次点击BMKAnnotationView都会回调此接口。
- *@param mapView 地图View
- *@param view 点击的annotation view
- */
-- (void)mapView:(BMKMapView *)mapView clickAnnotationView:(BMKAnnotationView *)view;
-
-/**
  *当选中一个annotation views时，调用此接口
- *当BMKAnnotation的title为nil，BMKAnnotationView的canShowCallout为NO时，不显示气泡，点击BMKAnnotationView会回调此接口。
- *当气泡已经弹出，点击BMKAnnotationView不会继续回调此接口。
  *@param mapView 地图View
  *@param view 选中的annotation views
  */

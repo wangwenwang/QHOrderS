@@ -6,6 +6,6 @@ pod 'SSZipArchive'
 pod 'MBProgressHUD', '~> 1.0.0'
 pod 'WechatOpenSDK'
 pod 'AFNetworking', '~> 3.0'
-pod 'BaiduMapKit'
+pod 'BaiduMapKit', '~> 3.4.4'
 pod 'LMProgressView'
 end

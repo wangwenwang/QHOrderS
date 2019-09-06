@@ -10,11 +10,11 @@
 #import "BMKPoiSearchType.h"
 #import <BaiduMapAPI_Base/BMKTypes.h>
 #import "BMKBusLineSearchOption.h"
-#import "BMKBusLineSearchResult.h"
+#import "BMKRouteSearchType.h"
 #import "BMKSearchBase.h"
 
 @protocol BMKBusLineSearchDelegate;
-/// 公交详情搜索服务
+///busline搜索服务
 @interface BMKBusLineSearch : BMKSearchBase
 /// 检索模块的Delegate，此处记得不用的时候需要置nil，否则影响内存的释放
 @property (nonatomic, weak) id<BMKBusLineSearchDelegate> delegate;
@@ -25,9 +25,10 @@
  *@param busLineSearchOption 公交线路检索信息类
  *@return 成功返回YES，否则返回NO
  */
-- (BOOL)busLineSearch:(BMKBusLineSearchOption *)busLineSearchOption;
-@end
+- (BOOL)busLineSearch:(BMKBusLineSearchOption*)busLineSearchOption;
 
+
+@end
 
 ///搜索delegate，用于获取搜索结果
 @protocol BMKBusLineSearchDelegate<NSObject>
@@ -38,7 +39,7 @@
  *@param busLineResult 搜索结果
  *@param error 错误号，@see BMKSearchErrorCode
  */
-- (void)onGetBusDetailResult:(BMKBusLineSearch *)searcher result:(BMKBusLineResult *)busLineResult errorCode:(BMKSearchErrorCode)error;
+- (void)onGetBusDetailResult:(BMKBusLineSearch*)searcher result:(BMKBusLineResult*)busLineResult errorCode:(BMKSearchErrorCode)error;
 
 @end
 

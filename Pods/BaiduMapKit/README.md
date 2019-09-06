@@ -2,9 +2,11 @@
 
 百度地图 iOS SDK(官方)
 
+
+
 --------------------------------------------------------------------------------------
 
-iOS 地图 SDK v4.4.0是适用于iOS系统移动设备的矢量地图开发包
+iOS 地图 SDK v3.4.4是适用于iOS系统移动设备的矢量地图开发包
 
 --------------------------------------------------------------------------------------
 
@@ -36,7 +38,7 @@ LBS云检索：支持查询存储在LBS云内的自有数据；
 --------------------------------------------------------------------------------------
  
  
- 【 温 馨 提 示 】
+ 【 新 版 提 示 】
  【 注 意 】
  1、自v3.2.0起，百度地图iOS SDK全面支持HTTPS，需要广大开发者导入第三方openssl静态库：libssl.a和libcrypto.a（存放于thirdlib目录下）
  添加方法：在 TARGETS->Build Phases-> Link Binary With Libaries中点击“+”按钮，在弹出的窗口中点击“Add Other”按钮，选择libssl.a和libcrypto.a添加到工程中 。
@@ -45,32 +47,11 @@ LBS云检索：支持查询存储在LBS云内的自有数据；
  pod setup //更新CocoPods的本地库
  pod search BaiduMapKit  //查看最新地图SDK
  
- 
- 
-v4.4.0版本：
+ 【【修复】
+ 1.支持iOS11系统定位权限
+ 2.个性化地图部分catlog不显示的问题
+ 3.室内图无背景色的问题
+ 4.polygon绘制大量节点折线，超出数量，产生飞线问题
+ 5.部分场景下，点击离线地图crash的问题
 
-【新增】
 
-1.新增设置最大俯仰角属性minOverlooking。
-
-2.新增AnnocationView点击回调clickAnnotationView。
-
-3.逆地理编码option增加radius，pageSize，pageNum属性。
-
-【修复】
-
-1.修复云检索BMKCloudPOIInfo中uid数据类型导致的uid数值不准确问题，使用字符串类型的poiId代替。
-
-2.修复annocationView气泡隐藏属性不兼容老版本问题，hidePaopaoWhenSingleTapOnMap默认YES，hidePaopaoWhenSelectOthers默认YES。
-
-3.修复mapView代理只能设置一次的问题。
-
-4.修复驾车路线规划有途径点时返回终点信息有误问题。
-
-5.修复regionDidChangeAnimated回调异常问题。
-
-6.修复点击默认气泡回调annotationViewForBubble两次的问题。
-
-7.修复其他小bugs若干。
-
-------------------------------------------------------------------------------------------------

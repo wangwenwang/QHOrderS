@@ -33,15 +33,14 @@
 /// 云检索结果信息类
 @interface BMKCloudPOIInfo : NSObject {
     int             _uid;
-    NSString        *_poiId;
     int             _geotableId;
     NSString        *_title;
     NSString        *_address;
     NSString        *_province;
     NSString        *_city;
     NSString        *_district;
-    double          _latitude;
-    double          _longitude;
+    float           _latitude;
+    float           _longitude;
     NSString        *_tags;
     float           _distance;
     float           _weight;
@@ -52,10 +51,8 @@
     
 
 }
-///poi数据id，废弃
-@property (nonatomic, assign) int             uid __deprecated_msg("自4.4.0开始废弃");
 ///poi数据id
-@property (nonatomic, strong) NSString        *poiId;
+@property (nonatomic, assign) int             uid;
 ///所属table的id
 @property (nonatomic, assign) int             geotableId;
 ///poi名称
@@ -69,9 +66,9 @@
 ///poi所属区县
 @property (nonatomic, strong) NSString        *district;
 ///poi所处位置的纬度
-@property (nonatomic, assign) double           latitude;
+@property (nonatomic, assign) float           latitude;
 ///poi所处位置的经度
-@property (nonatomic, assign) double           longitude;
+@property (nonatomic, assign) float           longitude;
 ///poi标签
 @property (nonatomic, strong) NSString        *tags;
 ///poi距离

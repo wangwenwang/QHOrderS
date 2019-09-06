@@ -9,7 +9,26 @@
 #import "BMKSuggestionSearchOption.h"
 #import <BaiduMapAPI_Base/BMKTypes.h>
 #import "BMKSearchBase.h"
-#import "BMKSuggestionSearchResult.h"
+
+///Suggestion结果类
+@interface BMKSuggestionResult : BMKSearchBase
+{
+    NSArray* _keyList;
+    NSArray* _cityList;
+    NSArray* _districtList;
+}
+///key列表，成员是NSString
+@property (nonatomic, strong) NSArray* keyList;
+///city列表，成员是NSString
+@property (nonatomic, strong) NSArray* cityList;
+///district列表，成员是NSString
+@property (nonatomic, strong) NSArray* districtList;
+///poiId列表，成员是NSString
+@property (nonatomic, strong) NSArray* poiIdList;
+///pt列表，成员是：封装成NSValue的CLLocationCoordinate2D
+@property (nonatomic, strong) NSArray* ptList;
+
+@end
 
 @protocol BMKSuggestionSearchDelegate;
 ///sug搜索服务
@@ -23,7 +42,7 @@
  *异步函数，返回结果在BMKSuggestionSearchDelegate的onGetSuggestionResult通知
  *@return 成功返回YES，否则返回NO
  */
-- (BOOL)suggestionSearch:(BMKSuggestionSearchOption *)suggestionSearchOption;
+- (BOOL)suggestionSearch:(BMKSuggestionSearchOption*)suggestionSearchOption;
 
 @end
 
@@ -36,7 +55,8 @@
  *@param result 搜索结果
  *@param error 错误号，@see BMKSearchErrorCode
  */
-- (void)onGetSuggestionResult:(BMKSuggestionSearch *)searcher result:(BMKSuggestionSearchResult *)result errorCode:(BMKSearchErrorCode)error;
+- (void)onGetSuggestionResult:(BMKSuggestionSearch*)searcher result:(BMKSuggestionResult*)result errorCode:(BMKSearchErrorCode)error;
+
 
 @end
 

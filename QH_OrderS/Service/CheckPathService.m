@@ -40,18 +40,18 @@
     
     NSString *url = [NSString stringWithFormat:@"%@%@", [Tools getServerAddress], @"getPathData.do"];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
-    NSDictionary *parameters = @{@"shipmentId" : idx};
-    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];\
+    NSString *params = [NSString stringWithFormat:@"{\"shipmentId\":\"%@\"}", idx] ;
+    NSDictionary *parameters = @{@"params" : params};
     NSLog(@"接口%@请求【获取配载单轨迹】参数：%@", url, parameters);
     
     [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         nil;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"请求成功---%@", responseObject);
-        int States = [responseObject[@"States"] intValue];
+        int States = [responseObject[@"status"] intValue];
         if(States == 1) {
-            NSArray *arrResult = responseObject[@"pathData"];
+            NSArray *arrResult = responseObject[@"data"];
             for (int i = 0; i < arrResult.count; i++) {
                 LocationModel *location = [[LocationModel alloc] init];
                 [location setDict:arrResult[i]];

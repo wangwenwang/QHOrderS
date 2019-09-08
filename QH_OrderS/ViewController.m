@@ -16,7 +16,6 @@
 #import "IOSToVue.h"
 #import "LMGetLoc.h"
 #import "CheckOrderPathViewController.h"
-#import "LMViewController.h"
 
 @interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate>
 

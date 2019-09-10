@@ -23,11 +23,8 @@
 		3B2CFB89231D3E9F0039C483 /* NSDictionary+toString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CFB83231D3E9F0039C483 /* NSDictionary+toString.m */; };
 		3B2CFB8A231D3E9F0039C483 /* NSString+toDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CFB84231D3E9F0039C483 /* NSString+toDict.m */; };
 		3B2CFB8B231D3E9F0039C483 /* NSDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CFB85231D3E9F0039C483 /* NSDictionary+Extension.m */; };
-		3B333462232261DB00B45490 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B333461232261DB00B45490 /* dist.zip */; };
-		3B333466232264EB00B45490 /* LMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B333464232264EB00B45490 /* LMViewController.m */; };
-		3B333467232264EB00B45490 /* LMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B333465232264EB00B45490 /* LMViewController.xib */; };
-		3B4A8D2A23228C3900461F07 /* CheckOrderPathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4A8D2723228C3900461F07 /* CheckOrderPathViewController.m */; };
-		3B4A8D2B23228C3900461F07 /* CheckOrderPathViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4A8D2823228C3900461F07 /* CheckOrderPathViewController.xib */; };
+		3B4A8D312322BCF100461F07 /* CheckOrderPathViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4A8D2E2322BCF000461F07 /* CheckOrderPathViewController.xib */; };
+		3B4A8D322322BCF100461F07 /* CheckOrderPathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4A8D302322BCF000461F07 /* CheckOrderPathViewController.m */; };
 		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
 		3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284A22F432AF009FCAF8 /* IOSToVue.m */; };
 		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
@@ -36,6 +33,7 @@
 		3BE88E9D232169A8008AC8E7 /* CheckPathService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88E9C232169A8008AC8E7 /* CheckPathService.m */; };
 		3BE88EA3232169FD008AC8E7 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88EA0232169FD008AC8E7 /* LocationModel.m */; };
 		3BE88EA4232169FD008AC8E7 /* RouteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88EA1232169FD008AC8E7 /* RouteAnnotation.m */; };
+		3BEFB0CD232742F5001E9526 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3BEFB0CC232742F5001E9526 /* dist.zip */; };
 		9CFB11A5FB77436ED36CDE93 /* libPods-QH_OrderS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DA69FEE1BB9777B55ADB628 /* libPods-QH_OrderS.a */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B0140D1232504D600CBE3F0 /* QH_OrderS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QH_OrderS.entitlements; sourceTree = "<group>"; };
 		3B04E18522DD757F005840FC /* Default-568@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568@2x.png"; sourceTree = "<group>"; };
 		3B04E18722DD778B005840FC /* QH_OrderS.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QH_OrderS.pch; sourceTree = "<group>"; };
 		3B04E18F22DD9DE9005840FC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -90,13 +89,9 @@
 		3B2CFB85231D3E9F0039C483 /* NSDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extension.m"; sourceTree = "<group>"; };
 		3B2CFB86231D3E9F0039C483 /* NSArray+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extension.h"; sourceTree = "<group>"; };
 		3B2CFB87231D3E9F0039C483 /* NSDictionary+toString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+toString.h"; sourceTree = "<group>"; };
-		3B333461232261DB00B45490 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
-		3B333463232264EB00B45490 /* LMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMViewController.h; sourceTree = "<group>"; };
-		3B333464232264EB00B45490 /* LMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LMViewController.m; sourceTree = "<group>"; };
-		3B333465232264EB00B45490 /* LMViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LMViewController.xib; sourceTree = "<group>"; };
-		3B4A8D2723228C3900461F07 /* CheckOrderPathViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOrderPathViewController.m; sourceTree = "<group>"; };
-		3B4A8D2823228C3900461F07 /* CheckOrderPathViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckOrderPathViewController.xib; sourceTree = "<group>"; };
-		3B4A8D2923228C3900461F07 /* CheckOrderPathViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOrderPathViewController.h; sourceTree = "<group>"; };
+		3B4A8D2E2322BCF000461F07 /* CheckOrderPathViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckOrderPathViewController.xib; sourceTree = "<group>"; };
+		3B4A8D2F2322BCF000461F07 /* CheckOrderPathViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOrderPathViewController.h; sourceTree = "<group>"; };
+		3B4A8D302322BCF000461F07 /* CheckOrderPathViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOrderPathViewController.m; sourceTree = "<group>"; };
 		3B54E9EF800DFD786F5143B1 /* Pods-QH_OrderS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QH_OrderS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS.debug.xcconfig"; sourceTree = "<group>"; };
 		3B79284922F432AF009FCAF8 /* LMGetLoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGetLoc.m; sourceTree = "<group>"; };
 		3B79284A22F432AF009FCAF8 /* IOSToVue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOSToVue.m; sourceTree = "<group>"; };
@@ -113,6 +108,7 @@
 		3BE88EA0232169FD008AC8E7 /* LocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationModel.m; sourceTree = "<group>"; };
 		3BE88EA1232169FD008AC8E7 /* RouteAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteAnnotation.m; sourceTree = "<group>"; };
 		3BE88EA2232169FD008AC8E7 /* LocationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationModel.h; sourceTree = "<group>"; };
+		3BEFB0CC232742F5001E9526 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		7DA69FEE1BB9777B55ADB628 /* libPods-QH_OrderS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QH_OrderS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9891314D5E289145FAAB882 /* Pods-QH_OrderS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QH_OrderS.release.xcconfig"; path = "Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,8 +196,9 @@
 		3B297DBB22DD6D750028847C /* QH_OrderS */ = {
 			isa = PBXGroup;
 			children = (
-				3B333461232261DB00B45490 /* dist.zip */,
+				3B0140D1232504D600CBE3F0 /* QH_OrderS.entitlements */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
+				3BEFB0CC232742F5001E9526 /* dist.zip */,
 				3BE88E9E232169FD008AC8E7 /* Custum */,
 				3B2CFB7F231D3E9F0039C483 /* Category */,
 				3BD20FA1230A9E73001A52A4 /* Service */,
@@ -211,12 +208,9 @@
 				3B297DBD22DD6D750028847C /* AppDelegate.m */,
 				3B297DBF22DD6D750028847C /* ViewController.h */,
 				3B297DC022DD6D750028847C /* ViewController.m */,
-				3B333463232264EB00B45490 /* LMViewController.h */,
-				3B333464232264EB00B45490 /* LMViewController.m */,
-				3B333465232264EB00B45490 /* LMViewController.xib */,
-				3B4A8D2923228C3900461F07 /* CheckOrderPathViewController.h */,
-				3B4A8D2723228C3900461F07 /* CheckOrderPathViewController.m */,
-				3B4A8D2823228C3900461F07 /* CheckOrderPathViewController.xib */,
+				3B4A8D2F2322BCF000461F07 /* CheckOrderPathViewController.h */,
+				3B4A8D302322BCF000461F07 /* CheckOrderPathViewController.m */,
+				3B4A8D2E2322BCF000461F07 /* CheckOrderPathViewController.xib */,
 				3B297DC522DD6D760028847C /* Assets.xcassets */,
 				3B297DC722DD6D760028847C /* LaunchScreen.storyboard */,
 				3B297DCA22DD6D760028847C /* Info.plist */,
@@ -331,7 +325,7 @@
 				3B297DB522DD6D750028847C /* Sources */,
 				3B297DB622DD6D750028847C /* Frameworks */,
 				3B297DB722DD6D750028847C /* Resources */,
-				2CD8C234D09C3D036E4DFDF4 /* [CP] Copy Pods Resources */,
+				BB395EC0CFD127F8FC493070 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -389,6 +383,17 @@
 				TargetAttributes = {
 					3B297DB822DD6D750028847C = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.WAC = {
+								enabled = 0;
+							};
+						};
 					};
 					3B297DD022DD6D760028847C = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -425,12 +430,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B4A8D2B23228C3900461F07 /* CheckOrderPathViewController.xib in Resources */,
+				3B4A8D312322BCF100461F07 /* CheckOrderPathViewController.xib in Resources */,
 				3B297DC922DD6D760028847C /* LaunchScreen.storyboard in Resources */,
 				3B297DC622DD6D760028847C /* Assets.xcassets in Resources */,
 				3B04E18622DD757F005840FC /* Default-568@2x.png in Resources */,
-				3B333462232261DB00B45490 /* dist.zip in Resources */,
-				3B333467232264EB00B45490 /* LMViewController.xib in Resources */,
+				3BEFB0CD232742F5001E9526 /* dist.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,23 +455,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2CD8C234D09C3D036E4DFDF4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A0342DB05CF03F91538C7457 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -484,6 +471,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB395EC0CFD127F8FC493070 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -506,9 +510,8 @@
 				3BE88EA4232169FD008AC8E7 /* RouteAnnotation.m in Sources */,
 				3B79285122F432AF009FCAF8 /* Tools.m in Sources */,
 				3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */,
-				3B333466232264EB00B45490 /* LMViewController.m in Sources */,
 				3BE88EA3232169FD008AC8E7 /* LocationModel.m in Sources */,
-				3B4A8D2A23228C3900461F07 /* CheckOrderPathViewController.m in Sources */,
+				3B4A8D322322BCF100461F07 /* CheckOrderPathViewController.m in Sources */,
 				3B297DC122DD6D750028847C /* ViewController.m in Sources */,
 				3B297DCC22DD6D760028847C /* main.m in Sources */,
 				3B04E19B22DD9DE9005840FC /* XHAppInfo.m in Sources */,
@@ -594,6 +597,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -654,6 +658,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -678,12 +683,14 @@
 			baseConfigurationReference = 3B54E9EF800DFD786F5143B1 /* Pods-QH_OrderS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QH_OrderS/QH_OrderS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AP5995A5FC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QH_OrderS/libs",
 				);
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = QH_OrderS/QH_OrderS.pch;
 				INFOPLIST_FILE = QH_OrderS/Info.plist;
@@ -703,12 +710,14 @@
 			baseConfigurationReference = D9891314D5E289145FAAB882 /* Pods-QH_OrderS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QH_OrderS/QH_OrderS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AP5995A5FC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QH_OrderS/libs",
 				);
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = QH_OrderS/QH_OrderS.pch;
 				INFOPLIST_FILE = QH_OrderS/Info.plist;

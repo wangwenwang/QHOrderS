@@ -8,4 +8,5 @@ pod 'WechatOpenSDK'
 pod 'AFNetworking', '~> 3.0'
 pod 'BaiduMapKit', '~> 3.4.4'
 pod 'LMProgressView'
+pod 'GTSDK', '2.4.0.0-noidfa'
 end

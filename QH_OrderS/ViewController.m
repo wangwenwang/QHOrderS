@@ -17,7 +17,12 @@
 #import "LMGetLoc.h"
 #import "CheckOrderPathViewController.h"
 
-@interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate>
+#import <AddressBookUI/ABPeoplePickerNavigationController.h>
+#import <AddressBook/ABPerson.h>
+#import <AddressBookUI/ABPersonViewController.h>
+#import <ContactsUI/ContactsUI.h>
+
+@interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate>
 
 @property (strong, nonatomic) AppDelegate *app;
 
@@ -226,13 +231,10 @@
         // 查看路线
         else if([first isEqualToString:@"查看路线"]) {
             
-//            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            
-                dispatch_async(dispatch_get_main_queue(), ^{
-                
-                    [weakSelf showLocLine:second andShipmentCode:third andShipmentStatus:fourth];
-                });
-//            });
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                [weakSelf showLocLine:second andShipmentCode:third andShipmentStatus:fourth];
+            });
         }
         // 服务器地址
         else if([first isEqualToString:@"服务器地址"]) {
@@ -257,6 +259,27 @@
                 
                 [IOSToVue TellVueCurrAddress:webView andAddress:address andLng:lng andLat:lat];
             }];
+        }
+        // 调用通讯录
+        else if([first isEqualToString:@"调用通讯录"]) {
+            
+            if(SystemVersion >= 10.0){
+                //iOS 10
+                //    AB_DEPRECATED("Use CNContactPickerViewController from ContactsUI.framework instead")
+                CNContactPickerViewController * contactVc = [CNContactPickerViewController new];
+                contactVc.delegate = self;
+                [self presentViewController:contactVc animated:YES completion:^{
+                    
+                }];
+            } else {
+                
+                ABPeoplePickerNavigationController *nav = [[ABPeoplePickerNavigationController alloc] init];
+                nav.peoplePickerDelegate = self;
+                if(SystemVersion > 8.0){
+                    nav.predicateForSelectionOfPerson = [NSPredicate predicateWithValue:false];
+                }
+                [self presentViewController:nav animated:YES completion:nil];
+            }
         }
         // 检查更新
         else if([first isEqualToString:@"检查版本更新"]) {
@@ -326,6 +349,45 @@
     vc.shipmentCode = shipmentCode;
     vc.shipmentStatus = shipmentStatus;
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+#pragma mark - iOS 10 联系人选择
+
+- (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty{
+    
+    NSString *givenName = contactProperty.contact.givenName;
+    NSString *familyName = contactProperty.contact.familyName;
+    NSString *fullName = [NSString stringWithFormat:@"%@%@", givenName, familyName];
+    
+    NSString *tel = [contactProperty.value stringValue];
+    tel = [tel stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    [IOSToVue TellVueContactPeople:self.webView andAddress:fullName andLng:tel];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - iOS 10以下 联系人选择
+
+// 选择联系人某个属性时调用（展开详情）
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+    
+    CFStringRef firstName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
+    CFStringRef lastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
+    
+    NSString *fir = CFBridgingRelease(firstName);
+    NSString *las = CFBridgingRelease(lastName);
+    
+    NSString *fullName = [NSString stringWithFormat:@"%@%@", las ? las : @"", fir ? fir : @""];
+    
+    ABMultiValueRef multi = ABRecordCopyValue(person, kABPersonPhoneProperty);
+    NSString *tel = (__bridge_transfer NSString *)  ABMultiValueCopyValueAtIndex(multi, identifier);
+    tel = [tel stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    [IOSToVue TellVueContactPeople:self.webView andAddress:fullName andLng:tel];
+    
+    NSLog(@"");
 }
 
 @end

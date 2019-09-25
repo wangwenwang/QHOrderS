@@ -83,6 +83,8 @@
     // [ 参考代码，开发者注意根据实际需求自行修改 ] 注册VOIP
     [self voipRegistration];
     
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
     return YES;
 }
 

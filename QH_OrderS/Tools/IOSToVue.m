@@ -61,4 +61,10 @@
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
++ (void)TellVueContactPeople:(nullable UIWebView *)webView andAddress:(nullable NSString *)name andLng:(nullable NSString *)tel {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"SetContactPeople('%@','%@')", name, tel];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
 @end

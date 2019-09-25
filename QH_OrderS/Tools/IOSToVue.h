@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 告诉Vue当前地址
 + (void)TellVueCurrAddress:(nullable UIWebView *)webView andAddress:(nullable NSString *)address andLng:(float)lng andLat:(float)lat;
 
+/// 告诉Vue通讯录选择结果
++ (void)TellVueContactPeople:(nullable UIWebView *)webView andAddress:(nullable NSString *)name andLng:(nullable NSString *)tel;
+
 @end
 
 NS_ASSUME_NONNULL_END

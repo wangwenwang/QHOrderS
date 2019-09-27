@@ -23,6 +23,16 @@
 		3B2CFB89231D3E9F0039C483 /* NSDictionary+toString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CFB83231D3E9F0039C483 /* NSDictionary+toString.m */; };
 		3B2CFB8A231D3E9F0039C483 /* NSString+toDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CFB84231D3E9F0039C483 /* NSString+toDict.m */; };
 		3B2CFB8B231D3E9F0039C483 /* NSDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CFB85231D3E9F0039C483 /* NSDictionary+Extension.m */; };
+		3B435691233DFE0400D38552 /* YBNeighborLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B43567E233DFE0400D38552 /* YBNeighborLocationCell.xib */; };
+		3B435692233DFE0400D38552 /* YBCurrentLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B435680233DFE0400D38552 /* YBCurrentLocationCell.m */; };
+		3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B435681233DFE0400D38552 /* YBCurrentLocationCell.xib */; };
+		3B435694233DFE0400D38552 /* YBNeighborLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B435682233DFE0400D38552 /* YBNeighborLocationCell.m */; };
+		3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B435688233DFE0400D38552 /* YBShowLocationVC.xib */; };
+		3B435696233DFE0400D38552 /* YBLocationSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B435689233DFE0400D38552 /* YBLocationSearchResultViewController.m */; };
+		3B435697233DFE0400D38552 /* YBShowLocationVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B43568A233DFE0400D38552 /* YBShowLocationVC.mm */; };
+		3B435698233DFE0400D38552 /* YBShowPanoranaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43568C233DFE0400D38552 /* YBShowPanoranaVC.m */; };
+		3B435699233DFE0400D38552 /* YBLocationPickerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B43568D233DFE0400D38552 /* YBLocationPickerViewController.mm */; };
+		3B43569A233DFE0400D38552 /* BaiduPanoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */; };
 		3B4A8D312322BCF100461F07 /* CheckOrderPathViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4A8D2E2322BCF000461F07 /* CheckOrderPathViewController.xib */; };
 		3B4A8D322322BCF100461F07 /* CheckOrderPathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4A8D302322BCF000461F07 /* CheckOrderPathViewController.m */; };
 		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
@@ -89,6 +99,22 @@
 		3B2CFB85231D3E9F0039C483 /* NSDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extension.m"; sourceTree = "<group>"; };
 		3B2CFB86231D3E9F0039C483 /* NSArray+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extension.h"; sourceTree = "<group>"; };
 		3B2CFB87231D3E9F0039C483 /* NSDictionary+toString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+toString.h"; sourceTree = "<group>"; };
+		3B43567E233DFE0400D38552 /* YBNeighborLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBNeighborLocationCell.xib; sourceTree = "<group>"; };
+		3B43567F233DFE0400D38552 /* YBNeighborLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBNeighborLocationCell.h; sourceTree = "<group>"; };
+		3B435680233DFE0400D38552 /* YBCurrentLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBCurrentLocationCell.m; sourceTree = "<group>"; };
+		3B435681233DFE0400D38552 /* YBCurrentLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBCurrentLocationCell.xib; sourceTree = "<group>"; };
+		3B435682233DFE0400D38552 /* YBNeighborLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBNeighborLocationCell.m; sourceTree = "<group>"; };
+		3B435683233DFE0400D38552 /* YBCurrentLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBCurrentLocationCell.h; sourceTree = "<group>"; };
+		3B435685233DFE0400D38552 /* YBLocationSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBLocationSearchResultViewController.h; sourceTree = "<group>"; };
+		3B435686233DFE0400D38552 /* YBShowLocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBShowLocationVC.h; sourceTree = "<group>"; };
+		3B435687233DFE0400D38552 /* YBShowPanoranaVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBShowPanoranaVC.h; sourceTree = "<group>"; };
+		3B435688233DFE0400D38552 /* YBShowLocationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBShowLocationVC.xib; sourceTree = "<group>"; };
+		3B435689233DFE0400D38552 /* YBLocationSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBLocationSearchResultViewController.m; sourceTree = "<group>"; };
+		3B43568A233DFE0400D38552 /* YBShowLocationVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YBShowLocationVC.mm; sourceTree = "<group>"; };
+		3B43568B233DFE0400D38552 /* YBLocationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBLocationPickerViewController.h; sourceTree = "<group>"; };
+		3B43568C233DFE0400D38552 /* YBShowPanoranaVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBShowPanoranaVC.m; sourceTree = "<group>"; };
+		3B43568D233DFE0400D38552 /* YBLocationPickerViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YBLocationPickerViewController.mm; sourceTree = "<group>"; };
+		3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduPanoSDK.framework; sourceTree = "<group>"; };
 		3B4A8D2E2322BCF000461F07 /* CheckOrderPathViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckOrderPathViewController.xib; sourceTree = "<group>"; };
 		3B4A8D2F2322BCF000461F07 /* CheckOrderPathViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOrderPathViewController.h; sourceTree = "<group>"; };
 		3B4A8D302322BCF000461F07 /* CheckOrderPathViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOrderPathViewController.m; sourceTree = "<group>"; };
@@ -121,6 +147,7 @@
 			files = (
 				9CFB11A5FB77436ED36CDE93 /* libPods-QH_OrderS.a in Frameworks */,
 				3BD20FAC230AC9CE001A52A4 /* BMKLocationKit.framework in Frameworks */,
+				3B43569A233DFE0400D38552 /* BaiduPanoSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +171,7 @@
 		3B04E18B22DD9DE9005840FC /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				3B43567B233DFE0400D38552 /* WeChatSendLocation */,
 				3B04E18E22DD9DE9005840FC /* Reachability */,
 				3B04E19122DD9DE9005840FC /* XHVersion */,
 			);
@@ -253,6 +281,69 @@
 				3B2CFB87231D3E9F0039C483 /* NSDictionary+toString.h */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		3B43567B233DFE0400D38552 /* WeChatSendLocation */ = {
+			isa = PBXGroup;
+			children = (
+				3B43567C233DFE0400D38552 /* LocationModule */,
+				3B43568E233DFE0400D38552 /* Vender */,
+			);
+			path = WeChatSendLocation;
+			sourceTree = "<group>";
+		};
+		3B43567C233DFE0400D38552 /* LocationModule */ = {
+			isa = PBXGroup;
+			children = (
+				3B43567D233DFE0400D38552 /* Cell */,
+				3B435684233DFE0400D38552 /* ViewController */,
+			);
+			path = LocationModule;
+			sourceTree = "<group>";
+		};
+		3B43567D233DFE0400D38552 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3B43567E233DFE0400D38552 /* YBNeighborLocationCell.xib */,
+				3B43567F233DFE0400D38552 /* YBNeighborLocationCell.h */,
+				3B435680233DFE0400D38552 /* YBCurrentLocationCell.m */,
+				3B435681233DFE0400D38552 /* YBCurrentLocationCell.xib */,
+				3B435682233DFE0400D38552 /* YBNeighborLocationCell.m */,
+				3B435683233DFE0400D38552 /* YBCurrentLocationCell.h */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3B435684233DFE0400D38552 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3B435686233DFE0400D38552 /* YBShowLocationVC.h */,
+				3B43568A233DFE0400D38552 /* YBShowLocationVC.mm */,
+				3B435687233DFE0400D38552 /* YBShowPanoranaVC.h */,
+				3B43568C233DFE0400D38552 /* YBShowPanoranaVC.m */,
+				3B435688233DFE0400D38552 /* YBShowLocationVC.xib */,
+				3B43568B233DFE0400D38552 /* YBLocationPickerViewController.h */,
+				3B43568D233DFE0400D38552 /* YBLocationPickerViewController.mm */,
+				3B435685233DFE0400D38552 /* YBLocationSearchResultViewController.h */,
+				3B435689233DFE0400D38552 /* YBLocationSearchResultViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		3B43568E233DFE0400D38552 /* Vender */ = {
+			isa = PBXGroup;
+			children = (
+				3B43568F233DFE0400D38552 /* baiduPanorama */,
+			);
+			path = Vender;
+			sourceTree = "<group>";
+		};
+		3B43568F233DFE0400D38552 /* baiduPanorama */ = {
+			isa = PBXGroup;
+			children = (
+				3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */,
+			);
+			path = baiduPanorama;
 			sourceTree = "<group>";
 		};
 		3B79284822F432AF009FCAF8 /* Tools */ = {
@@ -435,6 +526,9 @@
 				3B4A8D312322BCF100461F07 /* CheckOrderPathViewController.xib in Resources */,
 				3B297DC922DD6D760028847C /* LaunchScreen.storyboard in Resources */,
 				3B297DC622DD6D760028847C /* Assets.xcassets in Resources */,
+				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
+				3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */,
+				3B435691233DFE0400D38552 /* YBNeighborLocationCell.xib in Resources */,
 				3B04E18622DD757F005840FC /* Default-568@2x.png in Resources */,
 				3BBF8BA7233B6FD50070A8ED /* dist.zip in Resources */,
 			);
@@ -499,13 +593,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B435697233DFE0400D38552 /* YBShowLocationVC.mm in Sources */,
 				3B2CFB8A231D3E9F0039C483 /* NSString+toDict.m in Sources */,
 				3B2CFB89231D3E9F0039C483 /* NSDictionary+toString.m in Sources */,
 				3B2CFB8B231D3E9F0039C483 /* NSDictionary+Extension.m in Sources */,
+				3B435696233DFE0400D38552 /* YBLocationSearchResultViewController.m in Sources */,
 				3B2CFB88231D3E9F0039C483 /* NSArray+Extension.m in Sources */,
 				3B04E19922DD9DE9005840FC /* Reachability.m in Sources */,
+				3B435692233DFE0400D38552 /* YBCurrentLocationCell.m in Sources */,
 				3BD20FA4230A9E73001A52A4 /* ServiceTools.m in Sources */,
 				3B04E19A22DD9DE9005840FC /* XHVersion.m in Sources */,
+				3B435698233DFE0400D38552 /* YBShowPanoranaVC.m in Sources */,
 				3BE88E9D232169A8008AC8E7 /* CheckPathService.m in Sources */,
 				3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */,
 				3B04E19C22DD9DE9005840FC /* XHVersionRequest.m in Sources */,
@@ -513,9 +611,11 @@
 				3B79285122F432AF009FCAF8 /* Tools.m in Sources */,
 				3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */,
 				3BE88EA3232169FD008AC8E7 /* LocationModel.m in Sources */,
+				3B435699233DFE0400D38552 /* YBLocationPickerViewController.mm in Sources */,
 				3B4A8D322322BCF100461F07 /* CheckOrderPathViewController.m in Sources */,
 				3B297DC122DD6D750028847C /* ViewController.m in Sources */,
 				3B297DCC22DD6D760028847C /* main.m in Sources */,
+				3B435694233DFE0400D38552 /* YBNeighborLocationCell.m in Sources */,
 				3B04E19B22DD9DE9005840FC /* XHAppInfo.m in Sources */,
 				3B297DBE22DD6D750028847C /* AppDelegate.m in Sources */,
 			);

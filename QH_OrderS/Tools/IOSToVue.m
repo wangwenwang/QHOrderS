@@ -67,4 +67,10 @@
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
++ (void)TellVueSendLocation:(nullable UIWebView *)webView andAddress:(nullable NSString *)address andLng:(float)lng andLat:(float)lat {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"SetSendLocation('%@','%f','%f')", address, lng, lat];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
 @end

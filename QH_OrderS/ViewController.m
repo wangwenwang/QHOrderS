@@ -22,6 +22,8 @@
 #import <AddressBookUI/ABPersonViewController.h>
 #import <ContactsUI/ContactsUI.h>
 
+#import "YBLocationPickerViewController.h"
+
 @interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate>
 
 @property (strong, nonatomic) AppDelegate *app;
@@ -280,6 +282,25 @@
                 }
                 [self presentViewController:nav animated:YES completion:nil];
             }
+        }
+        // 调用发送位置
+        else if([first isEqualToString:@"调用发送位置"]) {
+            
+            YBLocationPickerViewController *picker = [[YBLocationPickerViewController alloc] init];
+            
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:picker];
+            
+            [self presentViewController:nav animated:YES completion:^{ }];
+            
+            picker.locationSelectBlock = ^(id locationInfo, YBLocationPickerViewController *locationPickController) {
+                NSLog(@"%@",locationInfo);
+                
+                //返回name address pt pt为坐标
+                double LONGITUDE = [locationInfo[@"LONGITUDE"] doubleValue];
+                double LATITUDE = [locationInfo[@"LATITUDE"] doubleValue];
+                NSString *address = [NSString stringWithFormat:@"%@（%@附近）",locationInfo[@"pt"], locationInfo[@"address"]];
+                [IOSToVue TellVueSendLocation:weakSelf.webView andAddress:address andLng:LONGITUDE andLat:LATITUDE];
+            };
         }
         // 检查更新
         else if([first isEqualToString:@"检查版本更新"]) {

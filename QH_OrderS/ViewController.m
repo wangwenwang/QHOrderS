@@ -24,6 +24,9 @@
 
 #import "YBLocationPickerViewController.h"
 
+#import <MapKit/MKMapItem.h>
+#import <BMKLocationkit/BMKLocationComponent.h>
+
 @interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate>
 
 @property (strong, nonatomic) AppDelegate *app;
@@ -227,7 +230,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-//                [self doNavigationWithEndLocation:second];
+                [self navigationOnclick:[third doubleValue] andLng:[second doubleValue] andAddress:fourth];
             });
         }
         // 查看路线
@@ -409,6 +412,118 @@
     [IOSToVue TellVueContactPeople:self.webView andAddress:fullName andLng:tel];
     
     NSLog(@"");
+}
+
+// 导航
+- (void)navigationOnclick:(double)lat andLng:(double)lng andAddress:(NSString *)address {
+    
+    NSMutableArray *maps = [NSMutableArray array];
+    
+    //苹果原生地图-苹果原生地图方法和其他不一样
+    NSMutableDictionary *iosMapDic = [NSMutableDictionary dictionary];
+    iosMapDic[@"title"] = @"苹果地图";
+    [maps addObject:iosMapDic];
+    
+    //高德地图
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
+        CLLocationCoordinate2D clBaidu = CLLocationCoordinate2DMake(lat, lng);
+        NSMutableDictionary *gaodeMapDic = [NSMutableDictionary dictionary];
+        gaodeMapDic[@"title"] = @"高德地图";
+        NSString *urlString = [[NSString stringWithFormat:@"iosamap://navi?sourceApplication=%@&&poiname=%@&poiid=BGVIS&lat=%f&lon=%f&dev=0&style=2", @"配货易订单", address, clBaidu.latitude, clBaidu.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        gaodeMapDic[@"url"] = urlString;
+        [maps addObject:gaodeMapDic];
+    }
+    
+    //百度地图
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]) {
+        // 高德转百度坐标
+        CLLocationCoordinate2D clGaode = CLLocationCoordinate2DMake(lat, lng);
+        CLLocationCoordinate2D clBaidu = [self gaoDeToBd:clGaode];
+        NSMutableDictionary *baiduMapDic = [NSMutableDictionary dictionary];
+        baiduMapDic[@"title"] = @"百度地图";
+        NSString *urlString =[[NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=latlng:%f,%f|name=%@&mode=driving&coord_type=gcj02", clBaidu.latitude, clBaidu.longitude, @""] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        baiduMapDic[@"url"] = urlString;
+        [maps addObject:baiduMapDic];
+    }
+    
+    //谷歌地图
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
+        NSMutableDictionary *googleMapDic = [NSMutableDictionary dictionary];
+        googleMapDic[@"title"] = @"谷歌地图";
+        NSString *urlString = [[NSString stringWithFormat:@"comgooglemaps://?x-source=%@&x-success=%@&saddr=&daddr=%@&directionsmode=driving",@"导航测试",@"nav123456", address] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        googleMapDic[@"url"] = urlString;
+        [maps addObject:googleMapDic];
+    }
+    
+    //选择
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"选择地图" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alert addAction:([UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil])];
+    
+    NSInteger index = maps.count;
+    
+    for (int i = 0; i < index; i++) {
+        
+        NSString * title = maps[i][@"title"];
+        
+        //苹果原生地图方法
+        if (i == 0) {
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:title style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                // 起点
+                MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+                
+                // 终点
+                CLGeocoder *geo = [[CLGeocoder alloc] init];
+                [geo geocodeAddressString:address completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+                    
+                    CLPlacemark *endMark=placemarks.firstObject;
+                    MKPlacemark *mkEndMark=[[MKPlacemark alloc]initWithPlacemark:endMark];
+                    MKMapItem *endItem=[[MKMapItem alloc]initWithPlacemark:mkEndMark];
+                    NSDictionary *dict=@{
+                                         MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
+                                         MKLaunchOptionsMapTypeKey:@(0),
+                                         MKLaunchOptionsShowsTrafficKey:@(YES)
+                                         };
+                    [MKMapItem openMapsWithItems:@[currentLocation,endItem] launchOptions:dict];
+                }];
+            }];
+            [alert addAction:action];
+            
+            continue;
+        }
+        
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            NSString *urlString = maps[i][@"url"];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+        }];
+        
+        [alert addAction:action];
+    }
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+// 百度地图经纬度转换为高德地图经纬度
+- (CLLocationCoordinate2D)bdToGaoDe:(CLLocationCoordinate2D)location {
+    
+    double bd_lat = location.latitude;
+    double bd_lon = location.longitude;
+    double PI = 3.14159265358979324 * 3000.0 / 180.0;
+    double x = bd_lon - 0.0065, y = bd_lat - 0.006;
+    double z = sqrt(x * x + y * y) - 0.00002 * sin(y * PI);
+    double theta = atan2(y, x) - 0.000003 * cos(x * PI);
+    return CLLocationCoordinate2DMake(z * sin(theta), z * cos(theta));
+}
+
+// 高德地图经纬度转换为百度地图经纬度
+- (CLLocationCoordinate2D)gaoDeToBd:(CLLocationCoordinate2D)location {
+    
+    BMKLocationCoordinateType srctype = BMKLocationCoordinateTypeBMK09LL;
+    BMKLocationCoordinateType destype = BMKLocationCoordinateTypeWGS84;
+    return [BMKLocationManager BMKLocationCoordinateConvert:location SrcType:srctype DesType:destype];
 }
 
 @end

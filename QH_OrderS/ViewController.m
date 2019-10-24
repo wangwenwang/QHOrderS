@@ -70,7 +70,7 @@
         
         // iPhoneXR、iPhoneXSMAX
         imageName = @"1125 × 2436";
-        [Tools showAlert:self.view andTitle:@"未知设备" andTime:5];
+//        [Tools showAlert:self.view andTitle:@"未知设备" andTime:5];
     }
     
     [imageV setImage:[UIImage imageNamed:imageName]];
@@ -293,17 +293,20 @@
             
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:picker];
             
-            [self presentViewController:nav animated:YES completion:^{ }];
-            
-            picker.locationSelectBlock = ^(id locationInfo, YBLocationPickerViewController *locationPickController) {
-                NSLog(@"%@",locationInfo);
+            dispatch_async(dispatch_get_main_queue(), ^{
                 
-                //返回name address pt pt为坐标
-                double LONGITUDE = [locationInfo[@"LONGITUDE"] doubleValue];
-                double LATITUDE = [locationInfo[@"LATITUDE"] doubleValue];
-                NSString *address = [NSString stringWithFormat:@"%@（%@附近）",locationInfo[@"pt"], locationInfo[@"address"]];
-                [IOSToVue TellVueSendLocation:weakSelf.webView andAddress:address andLng:LONGITUDE andLat:LATITUDE];
-            };
+                [self presentViewController:nav animated:YES completion:^{ }];
+                
+                picker.locationSelectBlock = ^(id locationInfo, YBLocationPickerViewController *locationPickController) {
+                    NSLog(@"%@",locationInfo);
+                    
+                    //返回name address pt pt为坐标
+                    double LONGITUDE = [locationInfo[@"LONGITUDE"] doubleValue];
+                    double LATITUDE = [locationInfo[@"LATITUDE"] doubleValue];
+                    NSString *address = [NSString stringWithFormat:@"%@（%@附近）",locationInfo[@"pt"], locationInfo[@"address"]];
+                    [IOSToVue TellVueSendLocation:weakSelf.webView andAddress:address andLng:LONGITUDE andLat:LATITUDE];
+                };
+            });
         }
         // 检查更新
         else if([first isEqualToString:@"检查版本更新"]) {

@@ -12,6 +12,7 @@
 		3B04E19A22DD9DE9005840FC /* XHVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04E19322DD9DE9005840FC /* XHVersion.m */; };
 		3B04E19B22DD9DE9005840FC /* XHAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04E19422DD9DE9005840FC /* XHAppInfo.m */; };
 		3B04E19C22DD9DE9005840FC /* XHVersionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04E19522DD9DE9005840FC /* XHVersionRequest.m */; };
+		3B2073E02361301800F4745A /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B2073DF2361301800F4745A /* dist.zip */; };
 		3B297DBE22DD6D750028847C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B297DBD22DD6D750028847C /* AppDelegate.m */; };
 		3B297DC122DD6D750028847C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B297DC022DD6D750028847C /* ViewController.m */; };
 		3B297DC622DD6D760028847C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B297DC522DD6D760028847C /* Assets.xcassets */; };
@@ -38,7 +39,6 @@
 		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
 		3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284A22F432AF009FCAF8 /* IOSToVue.m */; };
 		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
-		3BBF8BA7233B6FD50070A8ED /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3BBF8BA6233B6FD50070A8ED /* dist.zip */; };
 		3BD20FA4230A9E73001A52A4 /* ServiceTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD20FA2230A9E73001A52A4 /* ServiceTools.m */; };
 		3BD20FAC230AC9CE001A52A4 /* BMKLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */; };
 		3BE88E9D232169A8008AC8E7 /* CheckPathService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88E9C232169A8008AC8E7 /* CheckPathService.m */; };
@@ -76,6 +76,7 @@
 		3B04E19522DD9DE9005840FC /* XHVersionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHVersionRequest.m; sourceTree = "<group>"; };
 		3B04E19622DD9DE9005840FC /* XHVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHVersion.h; sourceTree = "<group>"; };
 		3B04E19722DD9DE9005840FC /* XHAppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHAppInfo.h; sourceTree = "<group>"; };
+		3B2073DF2361301800F4745A /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3B297DB922DD6D750028847C /* QH_OrderS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QH_OrderS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B297DBC22DD6D750028847C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B297DBD22DD6D750028847C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -126,7 +127,6 @@
 		3B79284D22F432AF009FCAF8 /* LMGetLoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGetLoc.h; sourceTree = "<group>"; };
 		3B79284E22F432AF009FCAF8 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		3BBF8B66233B616F0070A8ED /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		3BBF8BA6233B6FD50070A8ED /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = dist.zip; path = "../../../../../Volumes/[C] 我的 Boot Camp.hidden/Users/LM/Desktop/kdyylt-app/dist.zip"; sourceTree = "<group>"; };
 		3BD20FA2230A9E73001A52A4 /* ServiceTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTools.m; sourceTree = "<group>"; };
 		3BD20FA3230A9E73001A52A4 /* ServiceTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTools.h; sourceTree = "<group>"; };
 		3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BMKLocationKit.framework; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				3B0140D1232504D600CBE3F0 /* QH_OrderS.entitlements */,
-				3BBF8BA6233B6FD50070A8ED /* dist.zip */,
+				3B2073DF2361301800F4745A /* dist.zip */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
 				3BE88E9E232169FD008AC8E7 /* Custum */,
 				3B2CFB7F231D3E9F0039C483 /* Category */,
@@ -528,9 +528,9 @@
 				3B297DC622DD6D760028847C /* Assets.xcassets in Resources */,
 				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
 				3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */,
+				3B2073E02361301800F4745A /* dist.zip in Resources */,
 				3B435691233DFE0400D38552 /* YBNeighborLocationCell.xib in Resources */,
 				3B04E18622DD757F005840FC /* Default-568@2x.png in Resources */,
-				3BBF8BA7233B6FD50070A8ED /* dist.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,6 +787,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QH_OrderS/QH_OrderS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = AP5995A5FC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -802,6 +803,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaidongyuan.QHOrderS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -815,6 +817,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QH_OrderS/QH_OrderS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = AP5995A5FC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -830,6 +833,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaidongyuan.QHOrderS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

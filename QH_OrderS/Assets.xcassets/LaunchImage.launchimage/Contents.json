@@ -1,26 +1,28 @@
 {
   "images" : [
     {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
       "extent" : "full-screen",
-      "minimum-system-version" : "12.0",
+      "idiom" : "iphone",
       "subtype" : "2688h",
+      "filename" : "1242 × 2688.jpg",
+      "minimum-system-version" : "12.0",
+      "orientation" : "portrait",
       "scale" : "3x"
     },
     {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
       "extent" : "full-screen",
-      "minimum-system-version" : "12.0",
+      "idiom" : "iphone",
       "subtype" : "1792h",
+      "filename" : "828 × 1792.jpg",
+      "minimum-system-version" : "12.0",
+      "orientation" : "portrait",
       "scale" : "2x"
     },
     {
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "2436h",
-      "filename" : "1125 × 2436.png",
+      "filename" : "1125 × 2436.jpg",
       "minimum-system-version" : "11.0",
       "orientation" : "portrait",
       "scale" : "3x"
@@ -29,7 +31,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "736h",
-      "filename" : "1242 × 2208.png",
+      "filename" : "1242 × 2208.jpg",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "3x"
@@ -38,7 +40,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "667h",
-      "filename" : "750 × 1334.png",
+      "filename" : "750 × 1334.jpg",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -46,7 +48,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "640 × 960.png",
+      "filename" : "640 × 960.jpg",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -55,7 +57,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "640 × 1136.png",
+      "filename" : "640 × 1136.jpg",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"

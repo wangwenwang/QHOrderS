@@ -66,11 +66,15 @@
         
         // iPhoneX、iPhoneXS
         imageName = @"1125 × 2436";
+    }else if(ScreenHeight == 896){
+        
+        // iPhoneXR
+        imageName = @"1242 × 2688";
     }else {
         
-        // iPhoneXR、iPhoneXSMAX
-        imageName = @"1125 × 2436";
-//        [Tools showAlert:self.view andTitle:@"未知设备" andTime:5];
+        // iPhoneXSMAX
+        imageName = @"1242 × 2688";
+        [Tools showAlert:self.view andTitle:@"未知设备" andTime:5];
     }
     
     [imageV setImage:[UIImage imageNamed:imageName]];

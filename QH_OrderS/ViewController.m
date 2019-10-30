@@ -27,9 +27,16 @@
 #import <MapKit/MKMapItem.h>
 #import <BMKLocationkit/BMKLocationComponent.h>
 
-@interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate>
+#import <LMProgressView.h>
+#import "ServiceTools.h"
+
+@interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate, ServiceToolsDelegate>
 
 @property (strong, nonatomic) AppDelegate *app;
+
+@property (nonatomic, strong)UIView *downView;
+
+@property (nonatomic, strong)LMProgressView *progressView;
 
 @end
 
@@ -88,6 +95,28 @@
         
         [imageV removeFromSuperview];
     }];
+}
+
+
+#pragma mark - 检查版本
+
+- (void)checkZipVersion {
+    
+    NSString *currVersion = [Tools getZipVersion];
+    if(currVersion == nil) {
+        NSLog(@"初次检查zip版本，设置默认");
+        [Tools setZipVersion:kUserDefaults_ZipVersion_local_defaultValue];
+    }else{
+        NSLog(@"本地zip版本：%@", currVersion);
+    }
+    
+    ServiceTools *s = [[ServiceTools alloc] init];
+    s.delegate = self;
+    UIViewController *rootViewController = ((AppDelegate*)([UIApplication sharedApplication].delegate)).window.rootViewController;
+    if([rootViewController isKindOfClass:[ViewController class]]) {
+        
+        [s queryAppVersion:YES];
+    }
 }
 
 
@@ -313,9 +342,15 @@
             });
         }
         // 检查更新
-        else if([first isEqualToString:@"检查版本更新"]) {
+        else if([first isEqualToString:@"检查APP和VUE版本更新"]) {
             
-            // 检查更新
+            // 检查zip更新
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                [self checkZipVersion];
+            });
+            
+            // 检查AppStore更新
             [XHVersion checkNewVersion];
             
             // 2.如果你需要自定义提示框,请使用下面方法
@@ -531,6 +566,83 @@
     BMKLocationCoordinateType srctype = BMKLocationCoordinateTypeBMK09LL;
     BMKLocationCoordinateType destype = BMKLocationCoordinateTypeWGS84;
     return [BMKLocationManager BMKLocationCoordinateConvert:location SrcType:srctype DesType:destype];
+}
+
+
+#pragma mark - ServiceToolsDelegate
+
+// 开始下载zip
+- (void)downloadStart {
+    
+    if(!_downView) {
+        _downView = [[UIView alloc] init];
+    }
+    [_downView setFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    [_downView setBackgroundColor:RGB(145, 201, 249)];
+    [((AppDelegate*)([UIApplication sharedApplication].delegate)).window addSubview:_downView];
+    
+    _progressView = [[LMProgressView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(((AppDelegate*)([UIApplication sharedApplication].delegate)).window.frame), CGRectGetHeight(((AppDelegate*)([UIApplication sharedApplication].delegate)).window.frame))];
+    [_downView addSubview:_progressView];
+}
+
+// 下载zip进度
+- (void)downloadProgress:(double)progress {
+    
+    WeakSelf;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        weakSelf.progressView.progress = progress;
+    });
+}
+
+// 下载zip完成
+- (void)downloadCompletion:(NSString *)version andFilePath:(NSString *)filePath {
+    
+    WeakSelf;
+    
+    NSLog(@"解压中...");
+    NSString *unzipPath = [Tools getUnzipPath];
+    BOOL unzip_b = [SSZipArchive unzipFileAtPath:filePath toDestination:unzipPath];
+    if(unzip_b) {
+        
+        NSLog(@"解压完成，开始刷新APP内容...");
+    }else {
+        
+        NSLog(@"解压失败");
+    }
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSLog(@"延迟0.5秒");
+        usleep(500000);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            UIViewController *rootViewController = [Tools getRootViewController];
+            if([rootViewController isKindOfClass:[ViewController class]]) {
+                
+                ViewController *vc = (ViewController *)rootViewController;
+                [vc addWebView];
+            }
+            
+            [UIView animateWithDuration:0.2 animations:^{
+                
+                weakSelf.downView.alpha = 0.0f;
+            }completion:^(BOOL finished){
+                
+                [weakSelf.downView removeFromSuperview];
+                if(unzip_b) {
+                    
+                    [Tools setZipVersion:version];
+                }else {
+                    
+                    NSLog(@"zip解压失败，不更新zip版本号");
+                }
+            }];
+            NSLog(@"刷新内容完成");
+        });
+    });
 }
 
 @end

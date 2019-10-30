@@ -9,6 +9,7 @@
 #import "XHVersion.h"
 #import <StoreKit/StoreKit.h>
 #import "XHVersionRequest.h"
+#import "AppDelegate.h"
 
 @interface XHVersion()<UIAlertViewDelegate,SKStoreProductViewControllerDelegate>
 
@@ -82,7 +83,7 @@
 }
 - (UIViewController *)topViewController {
     UIViewController *resultVC;
-    resultVC = [self _topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
+    resultVC = [self _topViewController:[((AppDelegate*)([UIApplication sharedApplication].delegate)).window rootViewController]];
     while (resultVC.presentedViewController) {
         resultVC = [self _topViewController:resultVC.presentedViewController];
     }

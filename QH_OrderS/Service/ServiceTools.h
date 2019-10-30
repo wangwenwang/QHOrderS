@@ -31,6 +31,7 @@
 
 
 /// 查询版本号
-- (void)queryAppVersion;
+/// @param showPrompt 是否显示提示
+- (void)queryAppVersion:(BOOL)showPrompt;
 
 @end

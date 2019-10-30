@@ -225,7 +225,7 @@
     UIViewController *rootViewController = _window.rootViewController;
     if([rootViewController isKindOfClass:[ViewController class]]) {
         
-        [s queryAppVersion];
+        [s queryAppVersion:NO];
     }
 }
 

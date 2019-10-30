@@ -9,6 +9,7 @@
 #import "LMGetLoc.h"
 #import <BMKLocationkit/BMKLocationComponent.h>
 #import "Tools.h"
+#import "AppDelegate.h"
 
 @interface LMGetLoc ()<BMKLocationAuthDelegate, BMKLocationManagerDelegate>
 
@@ -111,7 +112,7 @@
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
-                    [Tools showAlert:[UIApplication sharedApplication].keyWindow andTitle:@"鉴权失败，重新定位"];
+                    [Tools showAlert:((AppDelegate*)([UIApplication sharedApplication].delegate)).window andTitle:@"鉴权失败，重新定位"];
                     // 执行定位
                     [weakSelf reGeocodeAction];
                 });

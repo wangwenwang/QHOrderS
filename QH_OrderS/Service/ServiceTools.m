@@ -32,7 +32,7 @@
     return self;
 }
 
-- (void)queryAppVersion {
+- (void)queryAppVersion:(BOOL)showPrompt {
     
     WeakSelf;
     
@@ -79,6 +79,12 @@
                                 [weakSelf.delegate downloadStart];
                             }
                             [self downZip:server_zipDownloadUrl andVersion:server_zipVersion];
+                        }else{
+                            
+                            if(showPrompt){
+
+                                [Tools showAlert:((AppDelegate*)([UIApplication sharedApplication].delegate)).window andTitle:@"已经是最新版本"];
+                            }
                         }
                     }else {
                         if([weakSelf.delegate respondsToSelector:@selector(failureOfLogin:)]) {

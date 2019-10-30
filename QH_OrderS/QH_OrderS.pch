@@ -30,7 +30,7 @@
 
 #define kUserDefaults_ZipVersion_local_key @"ZipVersion"
 
-#define kUserDefaults_ZipVersion_local_defaultValue @"0.1.5"
+#define kUserDefaults_ZipVersion_local_defaultValue @"0.0.1"
 
 #define kUserDefaults_Server_Address_key @"ServerAddress"
 

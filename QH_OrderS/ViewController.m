@@ -146,7 +146,9 @@
         NSString *checkFilePath = [unzipPath  stringByAppendingPathComponent:@"dist/index.html"];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         
-        if ([fileManager fileExistsAtPath:checkFilePath] && [[Tools getLastVersion] isEqualToString:[Tools getCFBundleShortVersionString]]) {
+//        if ([fileManager fileExistsAtPath:checkFilePath] && [[Tools getLastVersion] isEqualToString:[Tools getCFBundleShortVersionString]]) {
+        // 原生更新时，为了提高用户体验，不解压本地dist.zip，因为解压后很可能会触发vue更新（vue已经更新到0.0.9，原生里才0.0.7）
+        if ([fileManager fileExistsAtPath:checkFilePath]) {
             
             NSLog(@"HTML已存在，无需解压");
         } else {
@@ -155,6 +157,7 @@
             NSString *zipPath = [[NSBundle mainBundle] pathForResource:@"dist" ofType:@"zip"];
             NSLog(@"zipPath:%@", zipPath);
             [SSZipArchive unzipFileAtPath:zipPath toDestination:unzipPath];
+            [Tools setZipVersion:kUserDefaults_ZipVersion_local_defaultValue];
         }
         [Tools setLastVersion];
         
@@ -353,24 +356,24 @@
             // 检查AppStore更新
             [XHVersion checkNewVersion];
             
-            // 2.如果你需要自定义提示框,请使用下面方法
-            [XHVersion checkNewVersionAndCustomAlert:^(XHAppInfo *appInfo) {
-                
-                NSLog(@"新版本信息:\n 版本号 = %@ \n 更新时间 = %@\n 更新日志 = %@ \n 在AppStore中链接 = %@\n AppId = %@ \n bundleId = %@" ,appInfo.version,appInfo.currentVersionReleaseDate,appInfo.releaseNotes,appInfo.trackViewUrl,appInfo.trackId,appInfo.bundleId);
-            } andNoNewVersionBlock:^(XHAppInfo *appInfo) {
-                
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"已经是最新版本" message:@"" delegate:self cancelButtonTitle:@"确定", nil];
-                [alertView show];
-#endif
-                
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"已经是最新版本" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                }]];
-                [self presentViewController:alert animated:YES completion:nil];
-#endif
-            }];
+//            // 2.如果你需要自定义提示框,请使用下面方法
+//            [XHVersion checkNewVersionAndCustomAlert:^(XHAppInfo *appInfo) {
+//
+//                NSLog(@"新版本信息:\n 版本号 = %@ \n 更新时间 = %@\n 更新日志 = %@ \n 在AppStore中链接 = %@\n AppId = %@ \n bundleId = %@" ,appInfo.version,appInfo.currentVersionReleaseDate,appInfo.releaseNotes,appInfo.trackViewUrl,appInfo.trackId,appInfo.bundleId);
+//            } andNoNewVersionBlock:^(XHAppInfo *appInfo) {
+//
+//#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
+//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"已经是最新版本" message:@"" delegate:self cancelButtonTitle:@"确定", nil];
+//                [alertView show];
+//#endif
+//
+//#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
+//                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"已经是最新版本" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+//                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                }]];
+//                [self presentViewController:alert animated:YES completion:nil];
+//#endif
+//            }];
         }
         NSLog(@"js传ios：%@   %@   %@   %@",first, second, third, fourth);
     };

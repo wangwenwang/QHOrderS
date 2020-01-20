@@ -137,8 +137,13 @@
         // 长按5秒，开启webview编辑模式
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
         longPress.delegate = self;
-        longPress.minimumPressDuration = 2;
+        longPress.minimumPressDuration = 5;
         [_webView addGestureRecognizer:longPress];
+        
+        // 保存图片
+        UILongPressGestureRecognizer *longPress_image = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress_image:)];
+        longPress_image.delegate = self;
+        [_webView addGestureRecognizer:longPress_image];
         
         NSString *unzipPath = [Tools getUnzipPath];
         NSLog(@"unzipPath:%@", unzipPath);
@@ -401,6 +406,64 @@
                 [Tools closeWebviewEdit:weakSelf.webView];
             });
         });
+    }
+}
+
+-(void)longPress_image:(UILongPressGestureRecognizer *)sender{
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        
+        // 保存图片
+        CGPoint touchPoint = [sender locationInView:self.webView];
+        NSString *imgURL = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).src", touchPoint.x, touchPoint.y];
+        NSString *urlToSave = [self.webView stringByEvaluatingJavaScriptFromString:imgURL];
+        if (urlToSave.length == 0) {
+            return;
+        }
+        [self showImageOptionsWithUrl:urlToSave];
+    }
+}
+
+- (void)showImageOptionsWithUrl:(NSString *)imageUrl {
+    
+    UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:@"保存图片" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"点击了保存");
+        [self saveImageToDiskWithUrl:imageUrl];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"点击了取消");
+    }];
+    [actionSheetController addAction:saveAction];
+    [actionSheetController addAction:cancelAction];
+    [self presentViewController:actionSheetController animated:YES completion:nil];
+}
+
+- (void)saveImageToDiskWithUrl:(NSString *)imageUrl {
+    
+    NSURL *url = [NSURL URLWithString:imageUrl];
+    NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue new]];
+    NSURLRequest *imgRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30.0];
+    NSURLSessionDownloadTask  *task = [session downloadTaskWithRequest:imgRequest completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            return ;
+        }
+        NSData * imageData = [NSData dataWithContentsOfURL:location];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage * image = [UIImage imageWithData:imageData];
+            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+        });
+    }];
+    [task resume];
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error) {
+        [Tools showAlert:self.view andTitle:@"保存失败"];
+    }else{
+        [Tools showAlert:self.view andTitle:@"保存成功"];
     }
 }
 

@@ -57,6 +57,8 @@
 	<string>APP将获取您的位置，用来记录使用APP时的位置信息</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>APP将获取您的位置，用来记录使用APP时的位置信息</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>APP需要您的同意才能保存图片到相册，用于保存您工作中使用的图片</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>APP需要您的同意才能读取媒体资料库，用于上传照片</string>
 	<key>UILaunchStoryboardName</key>

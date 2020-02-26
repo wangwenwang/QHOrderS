@@ -100,7 +100,7 @@
 
 #pragma mark - 检查版本
 
-- (void)checkZipVersion {
+- (void)checkZipVersion:(BOOL)showPrompt {
     
     NSString *currVersion = [Tools getZipVersion];
     if(currVersion == nil) {
@@ -115,7 +115,7 @@
     UIViewController *rootViewController = ((AppDelegate*)([UIApplication sharedApplication].delegate)).window.rootViewController;
     if([rootViewController isKindOfClass:[ViewController class]]) {
         
-        [s queryAppVersion:YES];
+        [s queryAppVersion:showPrompt];
     }
 }
 
@@ -295,7 +295,13 @@
 //            }
 //            _service.delegate = self;
             
-            // 检查更新
+            // 检查zip更新
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self checkZipVersion:NO];
+            });
+            
+            // 检查AppStore更新
             [XHVersion checkNewVersion];
         }
         // 获取当前位置页面已加载，预留接口，防止js获取当前位置出问题
@@ -355,7 +361,7 @@
             // 检查zip更新
             dispatch_async(dispatch_get_main_queue(), ^{
 
-                [self checkZipVersion];
+                [self checkZipVersion:YES];
             });
             
             // 检查AppStore更新

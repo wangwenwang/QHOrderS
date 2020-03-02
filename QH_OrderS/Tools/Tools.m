@@ -10,8 +10,33 @@
 #import <MBProgressHUD.h>
 //#import "LM_alert.h"
 #import "AppDelegate.h"
+#import <CoreBluetooth/CoreBluetooth.h>
+
+@interface Tools()
+
+// 蓝牙检测
+@property (nonatomic, strong)CBCentralManager *centralManager;
+
+@end
 
 @implementation Tools
+
+- (instancetype)init {
+    
+    if(self = [super init]) {
+        
+        // 蓝牙检测
+        self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
+        
+    }
+    return self;
+}
+
+- (void)stopBleScan {
+    
+    [self.centralManager stopScan];
+    self.centralManager.delegate = nil;
+}
 
 + (nullable NSString *)getZipVersion {
     
@@ -166,6 +191,61 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:enter forKey:kUserDefaults_EnterTheHomePage];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+#pragma mark - CLLocationManagerDelegate
+
+-(void)centralManagerDidUpdateState:(CBCentralManager *)central {
+    
+    //第一次打开或者每次蓝牙状态改变都会调用这个函数
+    if(central.state == CBCentralManagerStatePoweredOn) {
+        NSLog(@"蓝牙设备开着");
+        self.blueToothOpen = YES;
+    }else {
+        NSLog(@"蓝牙设备关着");
+        self.blueToothOpen = NO;
+    }
+}
+
++ (NSString *)getCurrentDate {
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *currentDateString = [dateFormatter stringFromDate:currentDate];
+    return currentDateString;
+}
+
++ (nullable NSDictionary *)dictionaryWithJsonString:(nullable NSString *)jsonString {
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+
++ (int)textLength: (nullable NSString *)text {
+    NSUInteger asciiLength = 0;
+    for (NSUInteger i = 0; i < text.length; i++) {
+        unichar uc = [text characterAtIndex: i];
+        asciiLength += isascii(uc) ? 1 : 2;
+    }
+    int unicodeLength = asciiLength;
+    return unicodeLength;
+}
+
++ (nullable NSString *)OneDecimal:(nullable NSString *)str {
+    CGFloat flo = [str floatValue];
+    NSString *result = [NSString stringWithFormat:@"%.1f", flo];
+    return result;
 }
 
 @end

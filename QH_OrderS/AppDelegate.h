@@ -12,6 +12,11 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+//是否连接蓝牙
+@property (assign, nonatomic) BOOL isConnectedBLE;
+
+//是否连接Wi-Fi
+@property (assign, nonatomic) BOOL isConnectedWIFI;
 
 @end
 

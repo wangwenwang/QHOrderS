@@ -21,6 +21,10 @@
 
 /*--------- import ---------*/
 
+	
+/*--------- AppDelegate ---------*/
+#define SharedAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+
 
 #endif /* tms_ios_Prefix_pch */
 

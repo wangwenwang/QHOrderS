@@ -33,9 +33,16 @@
 		3B435698233DFE0400D38552 /* YBShowPanoranaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43568C233DFE0400D38552 /* YBShowPanoranaVC.m */; };
 		3B435699233DFE0400D38552 /* YBLocationPickerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B43568D233DFE0400D38552 /* YBLocationPickerViewController.mm */; };
 		3B43569A233DFE0400D38552 /* BaiduPanoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */; };
-		3B440439237423AA00B03268 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B440438237423AA00B03268 /* dist.zip */; };
 		3B4A8D312322BCF100461F07 /* CheckOrderPathViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4A8D2E2322BCF000461F07 /* CheckOrderPathViewController.xib */; };
 		3B4A8D322322BCF100461F07 /* CheckOrderPathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4A8D302322BCF000461F07 /* CheckOrderPathViewController.m */; };
+		3B77F51C240CB12100F38918 /* XYSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B77F51B240CB12000F38918 /* XYSDK.a */; };
+		3B77F527240CB1CD00F38918 /* SelectionDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B77F51E240CB1CD00F38918 /* SelectionDeviceCell.m */; };
+		3B77F528240CB1CD00F38918 /* SelectionDeviceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B77F520240CB1CD00F38918 /* SelectionDeviceVC.xib */; };
+		3B77F529240CB1CD00F38918 /* SelectionDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B77F521240CB1CD00F38918 /* SelectionDeviceCell.xib */; };
+		3B77F52A240CB1CD00F38918 /* PrintVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B77F523240CB1CD00F38918 /* PrintVC.m */; };
+		3B77F52B240CB1CD00F38918 /* PrintVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B77F525240CB1CD00F38918 /* PrintVC.xib */; };
+		3B77F52C240CB1CD00F38918 /* SelectionDeviceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B77F526240CB1CD00F38918 /* SelectionDeviceVC.m */; };
+		3B77F538240D17AC00F38918 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B77F537240D17AC00F38918 /* dist.zip */; };
 		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
 		3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284A22F432AF009FCAF8 /* IOSToVue.m */; };
 		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
@@ -115,11 +122,31 @@
 		3B43568C233DFE0400D38552 /* YBShowPanoranaVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBShowPanoranaVC.m; sourceTree = "<group>"; };
 		3B43568D233DFE0400D38552 /* YBLocationPickerViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YBLocationPickerViewController.mm; sourceTree = "<group>"; };
 		3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduPanoSDK.framework; sourceTree = "<group>"; };
-		3B440438237423AA00B03268 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3B4A8D2E2322BCF000461F07 /* CheckOrderPathViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckOrderPathViewController.xib; sourceTree = "<group>"; };
 		3B4A8D2F2322BCF000461F07 /* CheckOrderPathViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOrderPathViewController.h; sourceTree = "<group>"; };
 		3B4A8D302322BCF000461F07 /* CheckOrderPathViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOrderPathViewController.m; sourceTree = "<group>"; };
 		3B54E9EF800DFD786F5143B1 /* Pods-QH_OrderS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QH_OrderS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS.debug.xcconfig"; sourceTree = "<group>"; };
+		3B77F511240CB12000F38918 /* XYBLEManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBLEManager.h; sourceTree = "<group>"; };
+		3B77F512240CB12000F38918 /* PosCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosCommand.h; sourceTree = "<group>"; };
+		3B77F513240CB12000F38918 /* ImageTranster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTranster.h; sourceTree = "<group>"; };
+		3B77F514240CB12000F38918 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		3B77F515240CB12000F38918 /* BLEManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEManager.h; sourceTree = "<group>"; };
+		3B77F516240CB12000F38918 /* libXYPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libXYPrinter.h; sourceTree = "<group>"; };
+		3B77F517240CB12000F38918 /* TscCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TscCommand.h; sourceTree = "<group>"; };
+		3B77F518240CB12000F38918 /* XYSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSDK.h; sourceTree = "<group>"; };
+		3B77F519240CB12000F38918 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		3B77F51A240CB12000F38918 /* XYWIFIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYWIFIManager.h; sourceTree = "<group>"; };
+		3B77F51B240CB12000F38918 /* XYSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = XYSDK.a; sourceTree = "<group>"; };
+		3B77F51E240CB1CD00F38918 /* SelectionDeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionDeviceCell.m; sourceTree = "<group>"; };
+		3B77F51F240CB1CD00F38918 /* PrintVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintVC.h; sourceTree = "<group>"; };
+		3B77F520240CB1CD00F38918 /* SelectionDeviceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionDeviceVC.xib; sourceTree = "<group>"; };
+		3B77F521240CB1CD00F38918 /* SelectionDeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionDeviceCell.xib; sourceTree = "<group>"; };
+		3B77F522240CB1CD00F38918 /* SelectionDeviceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionDeviceVC.h; sourceTree = "<group>"; };
+		3B77F523240CB1CD00F38918 /* PrintVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintVC.m; sourceTree = "<group>"; };
+		3B77F524240CB1CD00F38918 /* SelectionDeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionDeviceCell.h; sourceTree = "<group>"; };
+		3B77F525240CB1CD00F38918 /* PrintVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrintVC.xib; sourceTree = "<group>"; };
+		3B77F526240CB1CD00F38918 /* SelectionDeviceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionDeviceVC.m; sourceTree = "<group>"; };
+		3B77F537240D17AC00F38918 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3B79284922F432AF009FCAF8 /* LMGetLoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGetLoc.m; sourceTree = "<group>"; };
 		3B79284A22F432AF009FCAF8 /* IOSToVue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOSToVue.m; sourceTree = "<group>"; };
 		3B79284B22F432AF009FCAF8 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
@@ -146,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CFB11A5FB77436ED36CDE93 /* libPods-QH_OrderS.a in Frameworks */,
+				3B77F51C240CB12100F38918 /* XYSDK.a in Frameworks */,
 				3BD20FAC230AC9CE001A52A4 /* BMKLocationKit.framework in Frameworks */,
 				3B43569A233DFE0400D38552 /* BaiduPanoSDK.framework in Frameworks */,
 			);
@@ -171,6 +199,8 @@
 		3B04E18B22DD9DE9005840FC /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				3B77F51D240CB1CC00F38918 /* XprinterIOS_View */,
+				3B77F50E240CB12000F38918 /* XYSDK */,
 				3B43567B233DFE0400D38552 /* WeChatSendLocation */,
 				3B04E18E22DD9DE9005840FC /* Reachability */,
 				3B04E19122DD9DE9005840FC /* XHVersion */,
@@ -226,8 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				3B0140D1232504D600CBE3F0 /* QH_OrderS.entitlements */,
-				3B440438237423AA00B03268 /* dist.zip */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
+				3B77F537240D17AC00F38918 /* dist.zip */,
 				3BE88E9E232169FD008AC8E7 /* Custum */,
 				3B2CFB7F231D3E9F0039C483 /* Category */,
 				3BD20FA1230A9E73001A52A4 /* Service */,
@@ -344,6 +374,56 @@
 				3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */,
 			);
 			path = baiduPanorama;
+			sourceTree = "<group>";
+		};
+		3B77F50E240CB12000F38918 /* XYSDK */ = {
+			isa = PBXGroup;
+			children = (
+				3B77F50F240CB12000F38918 /* include */,
+				3B77F51B240CB12000F38918 /* XYSDK.a */,
+			);
+			path = XYSDK;
+			sourceTree = "<group>";
+		};
+		3B77F50F240CB12000F38918 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				3B77F510240CB12000F38918 /* XYSDK */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		3B77F510240CB12000F38918 /* XYSDK */ = {
+			isa = PBXGroup;
+			children = (
+				3B77F511240CB12000F38918 /* XYBLEManager.h */,
+				3B77F512240CB12000F38918 /* PosCommand.h */,
+				3B77F513240CB12000F38918 /* ImageTranster.h */,
+				3B77F514240CB12000F38918 /* AsyncSocket.h */,
+				3B77F515240CB12000F38918 /* BLEManager.h */,
+				3B77F516240CB12000F38918 /* libXYPrinter.h */,
+				3B77F517240CB12000F38918 /* TscCommand.h */,
+				3B77F518240CB12000F38918 /* XYSDK.h */,
+				3B77F519240CB12000F38918 /* AsyncUdpSocket.h */,
+				3B77F51A240CB12000F38918 /* XYWIFIManager.h */,
+			);
+			path = XYSDK;
+			sourceTree = "<group>";
+		};
+		3B77F51D240CB1CC00F38918 /* XprinterIOS_View */ = {
+			isa = PBXGroup;
+			children = (
+				3B77F522240CB1CD00F38918 /* SelectionDeviceVC.h */,
+				3B77F526240CB1CD00F38918 /* SelectionDeviceVC.m */,
+				3B77F520240CB1CD00F38918 /* SelectionDeviceVC.xib */,
+				3B77F524240CB1CD00F38918 /* SelectionDeviceCell.h */,
+				3B77F51E240CB1CD00F38918 /* SelectionDeviceCell.m */,
+				3B77F521240CB1CD00F38918 /* SelectionDeviceCell.xib */,
+				3B77F51F240CB1CD00F38918 /* PrintVC.h */,
+				3B77F523240CB1CD00F38918 /* PrintVC.m */,
+				3B77F525240CB1CD00F38918 /* PrintVC.xib */,
+			);
+			path = XprinterIOS_View;
 			sourceTree = "<group>";
 		};
 		3B79284822F432AF009FCAF8 /* Tools */ = {
@@ -525,12 +605,15 @@
 			files = (
 				3B4A8D312322BCF100461F07 /* CheckOrderPathViewController.xib in Resources */,
 				3B297DC922DD6D760028847C /* LaunchScreen.storyboard in Resources */,
+				3B77F538240D17AC00F38918 /* dist.zip in Resources */,
 				3B297DC622DD6D760028847C /* Assets.xcassets in Resources */,
 				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
 				3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */,
-				3B440439237423AA00B03268 /* dist.zip in Resources */,
+				3B77F528240CB1CD00F38918 /* SelectionDeviceVC.xib in Resources */,
 				3B435691233DFE0400D38552 /* YBNeighborLocationCell.xib in Resources */,
+				3B77F529240CB1CD00F38918 /* SelectionDeviceCell.xib in Resources */,
 				3B04E18622DD757F005840FC /* Default-568@2x.png in Resources */,
+				3B77F52B240CB1CD00F38918 /* PrintVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,7 +677,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B435697233DFE0400D38552 /* YBShowLocationVC.mm in Sources */,
+				3B77F52C240CB1CD00F38918 /* SelectionDeviceVC.m in Sources */,
 				3B2CFB8A231D3E9F0039C483 /* NSString+toDict.m in Sources */,
+				3B77F527240CB1CD00F38918 /* SelectionDeviceCell.m in Sources */,
 				3B2CFB89231D3E9F0039C483 /* NSDictionary+toString.m in Sources */,
 				3B2CFB8B231D3E9F0039C483 /* NSDictionary+Extension.m in Sources */,
 				3B435696233DFE0400D38552 /* YBLocationSearchResultViewController.m in Sources */,
@@ -604,6 +689,7 @@
 				3BD20FA4230A9E73001A52A4 /* ServiceTools.m in Sources */,
 				3B04E19A22DD9DE9005840FC /* XHVersion.m in Sources */,
 				3B435698233DFE0400D38552 /* YBShowPanoranaVC.m in Sources */,
+				3B77F52A240CB1CD00F38918 /* PrintVC.m in Sources */,
 				3BE88E9D232169A8008AC8E7 /* CheckPathService.m in Sources */,
 				3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */,
 				3B04E19C22DD9DE9005840FC /* XHVersionRequest.m in Sources */,
@@ -803,6 +889,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/QH_OrderS/Third/XYSDK",
+				);
 				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaidongyuan.QHOrderS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -832,6 +922,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/QH_OrderS/Third/XYSDK",
 				);
 				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaidongyuan.QHOrderS;

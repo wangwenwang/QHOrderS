@@ -92,4 +92,45 @@
 /// 设置是否进入过主页（判断检查定位权限延迟，第一次进入延迟时长至10秒，否则延迟3秒）
 + (void)setEnterTheHomePage:(nullable NSString *)enter;
 
+
+/**
+ 蓝牙是否打开
+ */
+@property (nonatomic, assign) BOOL blueToothOpen;
+
+
+/**
+ * 获取手机当前时间
+ *
+ * return 手机当前时间 "yyy-MM-dd HH:mm:ss"
+ */
++ (nullable NSString *)getCurrentDate;
+
+
+/**
+ * JSON字符串转化为字典
+ *
+ * return 字典
+ */
++ (nullable NSDictionary *)dictionaryWithJsonString:(nullable NSString *)jsonString;
+
+
+/**
+ 判断一段字符串长度(汉字2字节)
+ 
+ @param text 字符串
+ @return 长度(汉字2字节)
+ */
++ (int)textLength: (nullable NSString *)text;
+
+
+/**
+ 保留字符串后面1位小数
+ 
+ @param str 字符串
+ 
+ @return 带1位小数的字符串
+ */
++ (nullable NSString *)OneDecimal:(nullable NSString *)str;
+
 @end

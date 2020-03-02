@@ -30,6 +30,8 @@
 #import <LMProgressView.h>
 #import "ServiceTools.h"
 
+#import "PrintVC.h"
+
 @interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate, ServiceToolsDelegate>
 
 @property (strong, nonatomic) AppDelegate *app;
@@ -316,8 +318,8 @@
         else if([first isEqualToString:@"调用通讯录"]) {
             
             if(SystemVersion >= 10.0){
-                //iOS 10
-                //    AB_DEPRECATED("Use CNContactPickerViewController from ContactsUI.framework instead")
+                // iOS 10
+                // AB_DEPRECATED("Use CNContactPickerViewController from ContactsUI.framework instead")
                 CNContactPickerViewController * contactVc = [CNContactPickerViewController new];
                 contactVc.delegate = self;
                 [self presentViewController:contactVc animated:YES completion:^{
@@ -366,25 +368,17 @@
             
             // 检查AppStore更新
             [XHVersion checkNewVersion];
+        }
+        // 打印
+        else if([first isEqualToString:@"打印"]) {
             
-//            // 2.如果你需要自定义提示框,请使用下面方法
-//            [XHVersion checkNewVersionAndCustomAlert:^(XHAppInfo *appInfo) {
-//
-//                NSLog(@"新版本信息:\n 版本号 = %@ \n 更新时间 = %@\n 更新日志 = %@ \n 在AppStore中链接 = %@\n AppId = %@ \n bundleId = %@" ,appInfo.version,appInfo.currentVersionReleaseDate,appInfo.releaseNotes,appInfo.trackViewUrl,appInfo.trackId,appInfo.bundleId);
-//            } andNoNewVersionBlock:^(XHAppInfo *appInfo) {
-//
-//#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
-//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"已经是最新版本" message:@"" delegate:self cancelButtonTitle:@"确定", nil];
-//                [alertView show];
-//#endif
-//
-//#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
-//                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"已经是最新版本" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-//                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                }]];
-//                [self presentViewController:alert animated:YES completion:nil];
-//#endif
-//            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSDictionary *dict = [Tools dictionaryWithJsonString:second];
+                PrintVC *vc = [[PrintVC alloc] init];
+                vc.dict = dict;
+                [self presentViewController:vc animated:YES completion:nil];
+            });
         }
         NSLog(@"js传ios：%@   %@   %@   %@",first, second, third, fourth);
     };

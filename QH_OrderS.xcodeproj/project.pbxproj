@@ -42,7 +42,7 @@
 		3B77F52A240CB1CD00F38918 /* PrintVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B77F523240CB1CD00F38918 /* PrintVC.m */; };
 		3B77F52B240CB1CD00F38918 /* PrintVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B77F525240CB1CD00F38918 /* PrintVC.xib */; };
 		3B77F52C240CB1CD00F38918 /* SelectionDeviceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B77F526240CB1CD00F38918 /* SelectionDeviceVC.m */; };
-		3B77F538240D17AC00F38918 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B77F537240D17AC00F38918 /* dist.zip */; };
+		3B77F53A240DC77900F38918 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B77F539240DC77900F38918 /* dist.zip */; };
 		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
 		3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284A22F432AF009FCAF8 /* IOSToVue.m */; };
 		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
@@ -146,7 +146,7 @@
 		3B77F524240CB1CD00F38918 /* SelectionDeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionDeviceCell.h; sourceTree = "<group>"; };
 		3B77F525240CB1CD00F38918 /* PrintVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrintVC.xib; sourceTree = "<group>"; };
 		3B77F526240CB1CD00F38918 /* SelectionDeviceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionDeviceVC.m; sourceTree = "<group>"; };
-		3B77F537240D17AC00F38918 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
+		3B77F539240DC77900F38918 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3B79284922F432AF009FCAF8 /* LMGetLoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGetLoc.m; sourceTree = "<group>"; };
 		3B79284A22F432AF009FCAF8 /* IOSToVue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOSToVue.m; sourceTree = "<group>"; };
 		3B79284B22F432AF009FCAF8 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
@@ -257,7 +257,7 @@
 			children = (
 				3B0140D1232504D600CBE3F0 /* QH_OrderS.entitlements */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
-				3B77F537240D17AC00F38918 /* dist.zip */,
+				3B77F539240DC77900F38918 /* dist.zip */,
 				3BE88E9E232169FD008AC8E7 /* Custum */,
 				3B2CFB7F231D3E9F0039C483 /* Category */,
 				3BD20FA1230A9E73001A52A4 /* Service */,
@@ -605,7 +605,7 @@
 			files = (
 				3B4A8D312322BCF100461F07 /* CheckOrderPathViewController.xib in Resources */,
 				3B297DC922DD6D760028847C /* LaunchScreen.storyboard in Resources */,
-				3B77F538240D17AC00F38918 /* dist.zip in Resources */,
+				3B77F53A240DC77900F38918 /* dist.zip in Resources */,
 				3B297DC622DD6D760028847C /* Assets.xcassets in Resources */,
 				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
 				3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */,

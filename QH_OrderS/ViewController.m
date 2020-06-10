@@ -352,7 +352,10 @@
                     //返回name address pt pt为坐标
                     double LONGITUDE = [locationInfo[@"LONGITUDE"] doubleValue];
                     double LATITUDE = [locationInfo[@"LATITUDE"] doubleValue];
-                    NSString *address = [NSString stringWithFormat:@"%@（%@附近）",locationInfo[@"pt"], locationInfo[@"address"]];
+                    CLLocationCoordinate2D lnglat = [self bdToGaoDe:CLLocationCoordinate2DMake(LATITUDE, LONGITUDE)];
+                    LONGITUDE = lnglat.longitude;
+                    LATITUDE = lnglat.latitude;
+                    NSString *address = [NSString stringWithFormat:@"%f,%f（%@附近）",lnglat.longitude, lnglat.latitude, locationInfo[@"address"]];
                     [IOSToVue TellVueSendLocation:weakSelf.webView andAddress:address andLng:LONGITUDE andLat:LATITUDE];
                 };
             });

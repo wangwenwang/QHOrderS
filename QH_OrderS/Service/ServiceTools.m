@@ -17,7 +17,7 @@
 
 @property (strong, nonatomic) AppDelegate *app;
 
-@property (strong, nonatomic) UIWebView *webview;
+@property (strong, nonatomic) WKWebView *webview;
 
 @end;
 
@@ -64,7 +64,7 @@
                         int c = [Tools compareVersion:server_zipVersion andLocati:currZipVersion];
                         if(c == 1) {
                         
-                            // 设置 webView 为 nil，解决UIWebview调用reload导致JSContext失效的问题
+                            // 设置 webView 为 nil，解决WKWebView调用reload导致JSContext失效的问题
                             UIViewController *rootViewController = [Tools getRootViewController];
                             if([rootViewController isKindOfClass:[ViewController class]]) {
                                 

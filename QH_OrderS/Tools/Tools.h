@@ -37,11 +37,11 @@
 
 
 /// 关闭Webview编辑功能
-+ (void)closeWebviewEdit:(nullable UIWebView *)_webView;
++ (void)closeWebviewEdit:(nullable WKWebView *)_webView;
 
 
 /// 打开Webview编辑功能
-+ (void)openWebviewEdit:(nullable UIWebView *)_webView;
++ (void)openWebviewEdit:(nullable WKWebView *)_webView;
 
 
 /// 判断是否允许定位

@@ -80,14 +80,14 @@
     return unzipPath;
 }
 
-+ (void)closeWebviewEdit:(nullable UIWebView *)_webView {
-    [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
-    [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
++ (void)closeWebviewEdit:(nullable WKWebView *)_webView {
+//    [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+//    [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
 }
 
-+ (void)openWebviewEdit:(nullable UIWebView *)_webView {
-    [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='text';"];
-    [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='text';"];
++ (void)openWebviewEdit:(nullable WKWebView *)_webView {
+//    [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='text';"];
+//    [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='text';"];
 }
 
 //+ (BOOL)isLocationServiceOpen {

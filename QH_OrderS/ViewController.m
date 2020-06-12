@@ -32,7 +32,7 @@
 
 #import "PrintVC.h"
 
-@interface ViewController ()<UIGestureRecognizerDelegate, UIWebViewDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate, ServiceToolsDelegate>
+@interface ViewController ()<UIGestureRecognizerDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate, ServiceToolsDelegate, WKUIDelegate, WKScriptMessageHandler>
 
 @property (strong, nonatomic) AppDelegate *app;
 
@@ -128,10 +128,16 @@
     
     if(_webView == nil) {
         
-        _webView = [[UIWebView alloc] init];
-        [_webView setFrame:CGRectMake(0, kStatusHeight, ScreenWidth, ScreenHeight - kStatusHeight - SafeAreaBottomHeight)];
-        _webView.delegate = self;
-        [self.view addSubview:_webView];
+        // wk代理
+        WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+        config.userContentController = [[WKUserContentController alloc] init];
+        [config.userContentController addScriptMessageHandler:self name:@"messageSend"];
+        config.preferences = [[WKPreferences alloc] init];
+        config.preferences.minimumFontSize = 0;
+        config.preferences.javaScriptEnabled = YES;
+        config.preferences.javaScriptCanOpenWindowsAutomatically = NO;
+        
+        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, kStatusHeight, ScreenWidth, ScreenHeight - kStatusHeight - SafeAreaBottomHeight) configuration:config];
         
         // 初始化信息
         _app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -169,10 +175,18 @@
         [Tools setLastVersion];
         
         // 加载URL
-        NSString *filePath = [NSString stringWithFormat:@"%@/dist/%@", unzipPath, @"index.html"];
-        NSURL *url = [[NSURL alloc] initWithString:filePath];
+        NSString *basePath = [NSString stringWithFormat:@"%@/dist/%@", unzipPath, @""];
+        NSURL *baseUrl = [NSURL fileURLWithPath:basePath];
+        NSURL *fileUrl = [self fileURLForBuggyWKWebView8WithFileURL:baseUrl];
         
-        [_webView loadRequest:[NSURLRequest requestWithURL:url]];
+        [_webView loadRequest:[NSURLRequest requestWithURL:fileUrl]];
+        _webView.UIDelegate = self;
+        [self.view addSubview:_webView];
+        
+        // 监听_webview 的状态
+        [_webView addObserver:self forKeyPath:@"loading" options:NSKeyValueObservingOptionNew context:nil];
+        [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
+        [_webView addObserver:self forKeyPath:@"estimaedProgress" options:NSKeyValueObservingOptionNew context:nil];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kReceive_WebView_Notification object:nil userInfo:@{@"webView":_webView}];
         // 禁用弹簧效果
@@ -199,16 +213,98 @@
 }
 
 
-#pragma mark - UIWebViewDelegate
+#pragma mark - WKWebViewDelegate
+- (NSURL *)fileURLForBuggyWKWebView8WithFileURL: (NSURL *)fileURL {
+    NSError *error = nil;
+    if (!fileURL.fileURL || ![fileURL checkResourceIsReachableAndReturnError:&error]) {
+        return nil;
+    }
+    NSFileManager *fileManager= [NSFileManager defaultManager];
+    NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
+    [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:&error];
+     NSURL *htmlDestURL = [temDirURL URLByAppendingPathComponent:fileURL.lastPathComponent];
+    [fileManager removeItemAtURL:htmlDestURL error:&error];
+    [fileManager copyItemAtURL:fileURL toURL:htmlDestURL error:&error];
+    NSURL *finalHtmlDestUrl = [htmlDestURL URLByAppendingPathComponent:@"index.html"];
+    return finalHtmlDestUrl;
+}
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"loading"]) {
+        NSLog(@"loading");
+    }else if ([keyPath isEqualToString:@"title"]){
+        self.title = self.webView.title;
+    }else if ([keyPath isEqualToString:@"estimaedProgress"]){
+       self.progressView.progress = self.webView.estimatedProgress;
+    }
+}
+
+-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+    NSLog(@"加载完成");
+}
+
+#pragma mark - WKUIDelegate
+//通过js alert 显示一个警告面板，调用原生会走此方法。
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+{
+    NSLog(@"显示一个JavaScript警告面板, message = %@",message);
+
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler();
+    }]];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+//通过 js confirm 显示一个确认面板，调用原生会走此方法。
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler
+{
+    NSLog(@"运行JavaScript确认面板， message = %@", message);
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"温馨提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(NO);
+    }] ];
+    
+    [action addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(YES);
+    }]];
+    
+    [self presentViewController:action animated:YES completion:nil];
+
+}
+//显示输入框
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable result))completionHandler
+{
+    
+    NSLog(@"显示一个JavaScript文本输入面板, message = %@",prompt);
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:defaultText message:prompt preferredStyle:UIAlertControllerStyleAlert];
+    
+    [controller addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.textColor = [UIColor redColor];
+    }];
+    
+    [controller addAction:[UIAlertAction actionWithTitle:@"输入信息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler([[controller.textFields lastObject] text]);
+    }]];
+    
+    [self presentViewController:controller animated:YES completion:nil];
+    
+}
+
+
+#pragma mark - WKWebViewDelegate
+
+- (void)webViewDidFinishLoad:(WKWebView *)webView {
     
     [Tools closeWebviewEdit:_webView];
 }
 
 
 // webViewDidFinishLoad方法晚于vue的mounted函数 0.3秒左右，不采用
-- (void)webViewDidStartLoad:(UIWebView *)webView{
+- (void)webViewDidStartLoad:(WKWebView *)webView{
     
     __weak __typeof(self)weakSelf = self;
     
@@ -243,7 +339,7 @@
             req.scope = @"snsapi_userinfo";
             req.state = @"wechat_sdk_tms";
             dispatch_async(dispatch_get_main_queue(), ^{
-                [WXApi sendReq:req];
+//                [WXApi sendReq:req];
             });
         }
         // 第一次加载登录页，不执行此函数，所以还写了一个定时器
@@ -291,11 +387,6 @@
         }
         // 记住帐号密码，开始定位
         else if([first isEqualToString:@"记住帐号密码"]) {
-            
-//            if(!_service) {
-//                _service = [[ServiceTools alloc] init];
-//            }
-//            _service.delegate = self;
             
             // 检查zip更新
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -387,6 +478,158 @@
     };
 }
 
+#pragma mark - WKScriptMessageHandler
+//当js 通过 注入的方法 @“messageSend” 时会调用代理回调。 原生收到的所有信息都通过此方法接收。
+-(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    
+    NSLog(@"原生收到了js发送过来的消息 message.body = %@",message.body);
+    
+    __weak __typeof(self)weakSelf = self;
+    
+    if([message.name isEqualToString:@"messageSend"]){
+        
+        // 第一次加载登录页，不执行此函数，所以还写了一个定时器
+        if([message.body[@"a"] isEqualToString:@"微信登录"]){
+            SendAuthReq* req = [[SendAuthReq alloc] init];
+            req.scope = @"snsapi_userinfo";
+            req.state = @"wechat_sdk_tms";
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [WXApi sendReq:req completion:nil];
+            });
+        }else if([message.body[@"a"] isEqualToString:@"登录页面已加载"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"weixin://"]] || [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"Whatapp://"]] || [WXApi isWXAppInstalled]) {
+                    
+                    // 微信
+                    NSLog(@"设备已安装【微信】");
+                }else {
+                    
+                    // 移除微信按钮
+                    [IOSToVue TellVueWXInstall_Check_Ajax:weakSelf.webView andIsInstall:@"NO"];
+                }
+                NSLog(@"设备已安装【微信】");
+            });
+            
+            // 发送APP版本号
+            [IOSToVue TellVueVersionShow:weakSelf.webView andVersion:[NSString stringWithFormat:@"版本:%@", [Tools getCFBundleShortVersionString]]];
+            
+            // 发送设备标识
+            [IOSToVue TellVueDevice:weakSelf.webView andDevice:@"iOS"];
+        }
+        // 导航
+        else if([message.body[@"a"] isEqualToString:@"导航"]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self navigationOnclick:[message.body[@"c"] doubleValue] andLng:[message.body[@"b"] doubleValue] andAddress:message.body[@"d"]];
+            });
+        }
+        // 查看路线
+        else if([message.body[@"a"] isEqualToString:@"查看路线"]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [weakSelf showLocLine:message.body[@"b"] andShipmentCode:message.body[@"c"] andShipmentStatus:message.body[@"d"]];
+            });
+        }
+        // 服务器地址
+        else if([message.body[@"a"] isEqualToString:@"服务器地址"]) {
+            
+            [Tools setServerAddress:message.body[@"b"]];
+        }
+        // 记住帐号密码，开始定位
+        else if([message.body[@"a"] isEqualToString:@"记住帐号密码"]) {
+            
+            // 检查zip更新
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self checkZipVersion:NO];
+            });
+            
+            // 检查AppStore更新
+            [XHVersion checkNewVersion];
+        }
+        // 获取当前位置页面已加载，预留接口，防止js获取当前位置出问题
+        else if([message.body[@"a"] isEqualToString:@"获取当前位置页面已加载"]) {
+            
+            [[[LMGetLoc alloc] init] startLoc:^(NSString * _Nonnull address, double lng, double lat) {
+                
+                [IOSToVue TellVueCurrAddress:weakSelf.webView andAddress:address andLng:lng andLat:lat];
+            }];
+        }
+        // 调用通讯录
+        else if([message.body[@"a"] isEqualToString:@"调用通讯录"]) {
+            
+            if(SystemVersion >= 10.0){
+                // iOS 10
+                // AB_DEPRECATED("Use CNContactPickerViewController from ContactsUI.framework instead")
+                CNContactPickerViewController * contactVc = [CNContactPickerViewController new];
+                contactVc.delegate = self;
+                [self presentViewController:contactVc animated:YES completion:^{
+                    
+                }];
+            } else {
+                
+                ABPeoplePickerNavigationController *nav = [[ABPeoplePickerNavigationController alloc] init];
+                nav.peoplePickerDelegate = self;
+                if(SystemVersion > 8.0){
+                    nav.predicateForSelectionOfPerson = [NSPredicate predicateWithValue:false];
+                }
+                [self presentViewController:nav animated:YES completion:nil];
+            }
+        }
+        // 调用发送位置
+        else if([message.body[@"a"] isEqualToString:@"调用发送位置"]) {
+            
+            YBLocationPickerViewController *picker = [[YBLocationPickerViewController alloc] init];
+            
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:picker];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self presentViewController:nav animated:YES completion:^{ }];
+                
+                picker.locationSelectBlock = ^(id locationInfo, YBLocationPickerViewController *locationPickController) {
+                    NSLog(@"%@",locationInfo);
+                    
+                    //返回name address pt pt为坐标
+                    double LONGITUDE = [locationInfo[@"LONGITUDE"] doubleValue];
+                    double LATITUDE = [locationInfo[@"LATITUDE"] doubleValue];
+                    CLLocationCoordinate2D lnglat = [self bdToGaoDe:CLLocationCoordinate2DMake(LATITUDE, LONGITUDE)];
+                    LONGITUDE = lnglat.longitude;
+                    LATITUDE = lnglat.latitude;
+                    NSString *address = [NSString stringWithFormat:@"%f,%f（%@附近）",lnglat.longitude, lnglat.latitude, locationInfo[@"address"]];
+                    [IOSToVue TellVueSendLocation:weakSelf.webView andAddress:address andLng:LONGITUDE andLat:LATITUDE];
+                };
+            });
+        }
+        // 检查更新
+        else if([message.body[@"a"] isEqualToString:@"检查APP和VUE版本更新"]) {
+            
+            // 检查zip更新
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                [self checkZipVersion:YES];
+            });
+            
+            // 检查AppStore更新
+            [XHVersion checkNewVersion];
+        }
+        // 打印
+        else if([message.body[@"a"] isEqualToString:@"打印"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSDictionary *dict = [Tools dictionaryWithJsonString:message.body[@"b"]];
+                PrintVC *vc = [[PrintVC alloc] init];
+                vc.dict = dict;
+                [self presentViewController:vc animated:YES completion:nil];
+            });
+        }
+    }
+}
+
 
 #pragma mark 长按手势事件
 
@@ -414,17 +657,17 @@
 
 -(void)longPress_image:(UILongPressGestureRecognizer *)sender{
     
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        
-        // 保存图片
-        CGPoint touchPoint = [sender locationInView:self.webView];
-        NSString *imgURL = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).src", touchPoint.x, touchPoint.y];
-        NSString *urlToSave = [self.webView stringByEvaluatingJavaScriptFromString:imgURL];
-        if (urlToSave.length == 0) {
-            return;
-        }
-        [self showImageOptionsWithUrl:urlToSave];
-    }
+//    if (sender.state == UIGestureRecognizerStateBegan) {
+//
+//        // 保存图片
+//        CGPoint touchPoint = [sender locationInView:self.webView];
+//        NSString *imgURL = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).src", touchPoint.x, touchPoint.y];
+//        NSString *urlToSave = [self.webView stringByEvaluatingJavaScriptFromString:imgURL];
+//        if (urlToSave.length == 0) {
+//            return;
+//        }
+//        [self showImageOptionsWithUrl:urlToSave];
+//    }
 }
 
 - (void)showImageOptionsWithUrl:(NSString *)imageUrl {

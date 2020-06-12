@@ -41,6 +41,7 @@
 		<string>iosamap</string>
 		<string>baidumap</string>
 		<string>comgooglemaps</string>
+		<string>weixinULAPI</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

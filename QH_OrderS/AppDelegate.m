@@ -32,7 +32,7 @@
 
 @interface AppDelegate ()<ServiceToolsDelegate, WXApiDelegate>
 
-@property (strong, nonatomic) UIWebView *webView;
+@property (strong, nonatomic) WKWebView *webView;
 
 @property (nonatomic, strong)UIView *downView;
 
@@ -66,7 +66,7 @@
     [_window makeKeyAndVisible];
     
     // 注册微信凭证
-    BOOL b = [WXApi registerApp:WXAPPID];
+    BOOL b = [WXApi registerApp:WXAPPID universalLink:@"https://tms.kaidongyuan.com"];
     
     if(b) { NSLog(@"微信注册成功");}
     else  { NSLog(@"微信注册失败");}

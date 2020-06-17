@@ -657,17 +657,31 @@
 
 -(void)longPress_image:(UILongPressGestureRecognizer *)sender{
     
-//    if (sender.state == UIGestureRecognizerStateBegan) {
-//
-//        // 保存图片
-//        CGPoint touchPoint = [sender locationInView:self.webView];
-//        NSString *imgURL = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).src", touchPoint.x, touchPoint.y];
-//        NSString *urlToSave = [self.webView stringByEvaluatingJavaScriptFromString:imgURL];
-//        if (urlToSave.length == 0) {
-//            return;
-//        }
-//        [self showImageOptionsWithUrl:urlToSave];
-//    }
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        
+        // 保存图片
+        CGPoint touchPoint = [sender locationInView:self.webView];
+        NSString *imgURL = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).src", touchPoint.x, touchPoint.y];
+        [self stringByEvaluatingJavaScriptFromString:imgURL completionHandler:^(NSString *result, NSError *error) {
+            if (result.length == 0) {
+                return;
+            }
+            [self showImageOptionsWithUrl:result];
+        }];
+    }
+}
+
+-(void)stringByEvaluatingJavaScriptFromString:(NSString *)javaScriptString completionHandler:(void (^)(NSString *result, NSError *error))completionHandler {
+    
+    [(WKWebView *)self.webView evaluateJavaScript:javaScriptString completionHandler:^(id obj, NSError *error) {
+        if(completionHandler) {
+            if([obj isKindOfClass:[NSString class]]) {
+                completionHandler(obj, error);
+            }else {
+                completionHandler(nil, error);
+            }
+        }
+    }];
 }
 
 - (void)showImageOptionsWithUrl:(NSString *)imageUrl {

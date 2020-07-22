@@ -327,6 +327,11 @@
         [dataM appendData:[XYCommand printAndFeedLine]];
         [dataM appendData: [@"客户签名：" dataUsingEncoding: gbkEncoding]];
         [dataM appendData:[XYCommand printAndFeedLine]];
+        // 换行，不用手动走纸
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        [dataM appendData:[XYCommand printAndFeedLine]];
     }
     
     if (SharedAppDelegate.isConnectedBLE) {

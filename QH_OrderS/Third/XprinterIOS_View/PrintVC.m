@@ -162,9 +162,227 @@
         return;
     }
     
-    [self printText:@"客户联"];
-    [self printText:@"虚线"];
-    [self printText:@"回单联"];
+    if([_dict[@"tenant_code"] isEqualToString:@"TYWL"]){
+        
+        [self printText_TY:@"存根联"];
+        [self printText_TY:@"虚线"];
+        [self printText_TY:@"客户联"];
+        [self printText_TY:@"虚线"];
+        [self printText_TY:@"回单联"];
+    }else{
+        
+        [self printText:@"客户联"];
+        [self printText:@"虚线"];
+        [self printText:@"回单联"];
+    }
+}
+
+- (void)printText_TY:(NSString *)CUSTOM_OR_RECEIPT {
+    
+    NSStringEncoding gbkEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    NSMutableData* dataM=[NSMutableData dataWithData:[XYCommand initializePrinter]];
+    
+    if ([CUSTOM_OR_RECEIPT isEqualToString:@"虚线"]) {
+        
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        [dataM appendData: [@"- - - - - - - - - - - - - - - - - - - - - - - -" dataUsingEncoding: gbkEncoding]];
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        if (SharedAppDelegate.isConnectedBLE) {
+            
+            [self.manager XYWriteCommandWithData:dataM];
+        }else{
+            
+            [Tools showAlert:self.view andTitle:@"请连接蓝牙"];
+        }
+        return;
+    }
+    
+    // 客户联|回单联
+    [dataM appendData:[XYCommand setAbsolutePrintXYitionWithNL:200 andNH:01]];
+    if ([CUSTOM_OR_RECEIPT isEqualToString:@"存根联"]) {
+        [dataM appendData: [@"【存根联】" dataUsingEncoding: gbkEncoding]];
+    }else if ([CUSTOM_OR_RECEIPT isEqualToString:@"客户联"]) {
+        [dataM appendData: [@"【客户联】" dataUsingEncoding: gbkEncoding]];
+    }else if ([CUSTOM_OR_RECEIPT isEqualToString:@"回单联"]) {
+        [dataM appendData: [@"【回单联】" dataUsingEncoding: gbkEncoding]];
+    }
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    
+    // 头部
+    // 抬头 居中
+    [dataM appendData:[XYCommand selectAlignment:1]];
+    
+//    [dataM appendData:[XYCommand selectOrCancleBoldModel:1]];
+    [dataM appendData:[XYCommand selectCharacterSize:17]];
+    [dataM appendData: [_dict[@"header"] dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    [dataM appendData:[XYCommand initializePrinter]];
+    
+    [dataM appendData:[XYCommand selectAlignment:0]];
+    [dataM appendData: [@"---------------------------------------------" dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    
+    // 订单号
+    NSString *orderNO = _dict[@"order_no"];
+    // 发货客户
+    NSString *conoCompany = _dict[@"cono_company"];
+    // 收货客户
+    NSString *coneCompany = _dict[@"cone_company"];
+    // 收货人
+    NSString *coneName = _dict[@"cone_name"];
+    // 收货人电话
+    NSString *coneTel = _dict[@"cone_tel"];
+    // 收货地址
+    NSString *coneAddress = _dict[@"cone_address"];
+    
+    // 订单号 居左
+    NSString *ordNo = [NSString stringWithFormat:@"订 单 号：%@", orderNO];
+    [dataM appendData: [ordNo dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    // 发货客户 居左
+    conoCompany = [NSString stringWithFormat:@"发货客户：%@", conoCompany];
+    [dataM appendData: [conoCompany dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    // 收货客户 居左
+    coneCompany = [NSString stringWithFormat:@"收货客户：%@", coneCompany];
+    [dataM appendData: [coneCompany dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    // 收货人 居左
+    coneName = [NSString stringWithFormat:@"收 货 人：%@  %@", coneName, coneTel];
+    [dataM appendData: [coneName dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    // 收货地址
+    coneAddress = [NSString stringWithFormat:@"收货地址：%@", coneAddress];
+    [dataM appendData: [coneAddress dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    [dataM appendData: [@"---------------------------------------------" dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    // 商品格式说明 居左
+    [dataM appendData: [@"商品/数量/重量" dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    [dataM appendData: [@"---------------------------------------------" dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    [dataM appendData:[XYCommand selectAlignment:0]];
+    
+    NSArray *product =_dict[@"product"];
+    for (int i = 0; i < product.count; i++) {
+        
+        NSDictionary *p = product[i];
+        
+        NSString *name = [NSString stringWithFormat:@"%d.%@", i + 1, p[@"name"]];
+        // 产品名称太长，分两行
+        NSString *namePadPreix = name;
+        NSString *nameSuffix = @"";
+        
+        // 数量占位t符
+        NSString *qtyLoc = @"abcdefgheijklnmopqrstuv";
+        int nameLenght = [Tools textLength:namePadPreix];
+        int pad = [Tools textLength:qtyLoc] - nameLenght;
+        if(pad > 0){
+            for (int i = 0; i < pad; i++) {
+                namePadPreix = [namePadPreix stringByAppendingFormat:@" "];
+            }
+        }
+        
+        // 产品名称超过设置长度，自动换行
+        if(pad < 0) {
+            int padPreix = 1;
+            for (int i = 0; i <= name.length; i++) {
+                if(padPreix > 0) {
+                    namePadPreix = [name substringToIndex:i];
+                    int namePadPreixLenght = [Tools textLength:namePadPreix];
+                    padPreix = [Tools textLength:qtyLoc] - namePadPreixLenght;
+                }else {
+                    nameSuffix = [name substringFromIndex:i - 1];
+                    break;
+                }
+            }
+        }
+        
+        // 名称
+        [dataM appendData:[XYCommand setAbsolutePrintXYitionWithNL:00 andNH:00]];
+        [dataM appendData: [namePadPreix dataUsingEncoding: gbkEncoding]];
+        
+        // 数量
+        NSString *qty = [NSString stringWithFormat:@"   %@[%@]", [Tools  OneDecimal:p[@"qty"]], p[@"uom"]];
+        [dataM appendData: [qty dataUsingEncoding: gbkEncoding]];
+        
+        // 重量
+        NSString *weight = [NSString stringWithFormat:@"%.1f公斤", [p[@"weight"] floatValue]];
+        [dataM appendData:[XYCommand setAbsolutePrintXYitionWithNL:200 andNH:01]];
+        [dataM appendData: [weight dataUsingEncoding: gbkEncoding]];
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        
+        if(pad < 0) {
+            // 名称(第二行)
+            [dataM appendData:[XYCommand setAbsolutePrintXYitionWithNL:25 andNH:00]];
+            [dataM appendData: [nameSuffix dataUsingEncoding: gbkEncoding]];
+            [dataM appendData:[XYCommand printAndFeedLine]];
+        }
+    }
+    
+    // 总数量
+    float totalQTY = [_dict[@"total_qty"] floatValue];
+    // 总重量
+    float totalWeight = [_dict[@"total_weight"] floatValue];
+    // 订单类型
+    NSString *orderType = _dict[@"order_type"];
+    // 交货方式
+    NSString *deliveryWay = _dict[@"delivery_way"];
+    // 下单时间
+    NSString *ordDateAdd = _dict[@"ord_date_add"];
+    // 打印人
+    NSString *printPerson = _dict[@"print_person"];
+    
+    // 尾部
+    // 总数量、总重量
+    [dataM appendData:[XYCommand selectAlignment:0]];
+    [dataM appendData: [@"---------------------------------------------" dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    NSString *total = [NSString stringWithFormat:@"总 数 量：%.1f     总重量：%.1f公斤", totalQTY, totalWeight];
+    [dataM appendData: [total dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    
+    // 订单类型 居左
+    orderType = [NSString stringWithFormat:@"订单类型：%@", orderType];
+    [dataM appendData: [orderType dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    
+    // 交货方式 居左
+    deliveryWay = [NSString stringWithFormat:@"交货方式：%@", deliveryWay];
+    [dataM appendData: [deliveryWay dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    
+    // 下单时间 居左
+    ordDateAdd = [NSString stringWithFormat:@"下单时间：%@", ordDateAdd];
+    [dataM appendData: [ordDateAdd dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    
+    // 打印人 居左
+    printPerson = [NSString stringWithFormat:@"打 印 人：%@", printPerson];
+    [dataM appendData: [printPerson dataUsingEncoding: gbkEncoding]];
+    [dataM appendData:[XYCommand printAndFeedLine]];
+    
+    if ([CUSTOM_OR_RECEIPT isEqualToString:@"回单联"]) {
+        
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        [dataM appendData: [@"客户签名：" dataUsingEncoding: gbkEncoding]];
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        // 换行，不用手动走纸
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        [dataM appendData:[XYCommand printAndFeedLine]];
+        [dataM appendData:[XYCommand printAndFeedLine]];
+    }
+    
+    if (SharedAppDelegate.isConnectedBLE) {
+        
+        [self.manager XYWriteCommandWithData:dataM];
+    }else{
+        
+        [Tools showAlert:self.view andTitle:@"请连接蓝牙"];
+    }
 }
 
 - (void)printText:(NSString *)CUSTOM_OR_RECEIPT {

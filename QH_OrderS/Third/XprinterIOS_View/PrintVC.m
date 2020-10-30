@@ -309,7 +309,7 @@
         [dataM appendData: [qty dataUsingEncoding: gbkEncoding]];
         
         // 重量
-        NSString *weight = [NSString stringWithFormat:@"%.1f公斤", [p[@"weight"] floatValue]];
+        NSString *weight = p[@"weight"];
         [dataM appendData:[XYCommand setAbsolutePrintXYitionWithNL:200 andNH:01]];
         [dataM appendData: [weight dataUsingEncoding: gbkEncoding]];
         [dataM appendData:[XYCommand printAndFeedLine]];
@@ -323,9 +323,9 @@
     }
     
     // 总数量
-    float totalQTY = [_dict[@"total_qty"] floatValue];
+    NSString *totalQTY = _dict[@"total_qty"];
     // 总重量
-    float totalWeight = [_dict[@"total_weight"] floatValue];
+    NSString *totalWeight = _dict[@"total_weight"];
     // 订单类型
     NSString *orderType = _dict[@"order_type"];
     // 交货方式
@@ -340,7 +340,7 @@
     [dataM appendData:[XYCommand selectAlignment:0]];
     [dataM appendData: [@"---------------------------------------------" dataUsingEncoding: gbkEncoding]];
     [dataM appendData:[XYCommand printAndFeedLine]];
-    NSString *total = [NSString stringWithFormat:@"总 数 量：%.1f     总重量：%.1f公斤", totalQTY, totalWeight];
+    NSString *total = [NSString stringWithFormat:@"总 数 量：%@     总重量：%@", totalQTY, totalWeight];
     [dataM appendData: [total dataUsingEncoding: gbkEncoding]];
     [dataM appendData:[XYCommand printAndFeedLine]];
     

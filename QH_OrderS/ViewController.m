@@ -627,6 +627,14 @@
                 [self presentViewController:vc animated:YES completion:nil];
             });
         }
+        // 支付宝支付
+        else if([message.body[@"a"] isEqualToString:@"支付宝支付"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:message.body[@"b"]]];
+            });
+        }
     }
 }
 

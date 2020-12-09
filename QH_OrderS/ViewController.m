@@ -369,7 +369,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [self navigationOnclick:[third doubleValue] andLng:[second doubleValue] andAddress:fourth];
+//                [self navigationOnclick:[third doubleValue] andLng:[second doubleValue] andAddress:fourth and];
             });
         }
         // 查看路线
@@ -523,7 +523,7 @@
         else if([message.body[@"a"] isEqualToString:@"导航"]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [self navigationOnclick:[message.body[@"c"] doubleValue] andLng:[message.body[@"b"] doubleValue] andAddress:message.body[@"d"]];
+                [self navigationOnclick:[message.body[@"c"] doubleValue] andLng:[message.body[@"b"] doubleValue] andAddress:message.body[@"d"] andName:message.body[@"name"]];
             });
         }
         // 查看路线
@@ -793,7 +793,7 @@
 }
 
 // 导航
-- (void)navigationOnclick:(double)lat andLng:(double)lng andAddress:(NSString *)address {
+- (void)navigationOnclick:(double)lat andLng:(double)lng andAddress:(NSString *)address andName:(NSString *)name{
     
     NSMutableArray *maps = [NSMutableArray array];
     
@@ -804,10 +804,14 @@
     
     //高德地图
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
-        CLLocationCoordinate2D clBaidu = CLLocationCoordinate2DMake(lat, lng);
         NSMutableDictionary *gaodeMapDic = [NSMutableDictionary dictionary];
         gaodeMapDic[@"title"] = @"高德地图";
-        NSString *urlString = [[NSString stringWithFormat:@"iosamap://navi?sourceApplication=%@&&poiname=%@&poiid=BGVIS&lat=%f&lon=%f&dev=0&style=2", @"配货易订单", address, clBaidu.latitude, clBaidu.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *urlString;
+        if(lng && lat){
+            urlString = [NSString stringWithFormat:@"iosamap://path?sourceApplication=卖货易S&sid=BGVIS1&slat=&slon=&sname=&did=BGVIS2&dlat=%f&dlon=%f&dname=%@&dev=0&m=0&t=0", lat, lng, name];
+        }else{
+            urlString = [NSString stringWithFormat:@"iosamap://path?sourceApplication=卖货易S&sid=BGVIS1&slat=&slon=&sname=&did=BGVIS2&dname=%@&dev=0&t=0", address];
+        }
         urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         gaodeMapDic[@"url"] = urlString;
         [maps addObject:gaodeMapDic];
@@ -815,12 +819,15 @@
     
     //百度地图
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]) {
-        // 高德转百度坐标
-        CLLocationCoordinate2D clGaode = CLLocationCoordinate2DMake(lat, lng);
-        CLLocationCoordinate2D clBaidu = [self gaoDeToBd:clGaode];
         NSMutableDictionary *baiduMapDic = [NSMutableDictionary dictionary];
         baiduMapDic[@"title"] = @"百度地图";
-        NSString *urlString =[[NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=latlng:%f,%f|name=%@&mode=driving&coord_type=gcj02", clBaidu.latitude, clBaidu.longitude, @""] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *urlString;
+        if(lng && lat){
+            urlString = [NSString stringWithFormat:@"baidumap://map/direction?destination=%f,%f&mode=driving&coord_type=gcj02&src=%@", lat, lng, name];
+        }else{
+            urlString = [NSString stringWithFormat:@"baidumap://map/direction?destination=%@&mode=driving&coord_type=gcj02", address];
+        }
+        urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         baiduMapDic[@"url"] = urlString;
         [maps addObject:baiduMapDic];
     }
@@ -851,21 +858,29 @@
             UIAlertAction * action = [UIAlertAction actionWithTitle:title style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                 // 起点
                 MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
-                
+                // 配置
+                NSDictionary *dict = @{
+                    MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
+                    MKLaunchOptionsMapTypeKey:@(0),
+                    MKLaunchOptionsShowsTrafficKey:@(YES)
+                };
                 // 终点
-                CLGeocoder *geo = [[CLGeocoder alloc] init];
-                [geo geocodeAddressString:address completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-                    
-                    CLPlacemark *endMark=placemarks.firstObject;
-                    MKPlacemark *mkEndMark=[[MKPlacemark alloc]initWithPlacemark:endMark];
-                    MKMapItem *endItem=[[MKMapItem alloc]initWithPlacemark:mkEndMark];
-                    NSDictionary *dict=@{
-                                         MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
-                                         MKLaunchOptionsMapTypeKey:@(0),
-                                         MKLaunchOptionsShowsTrafficKey:@(YES)
-                                         };
-                    [MKMapItem openMapsWithItems:@[currentLocation,endItem] launchOptions:dict];
-                }];
+                if(lng && lat){
+                    CLLocationCoordinate2D lng_lat = CLLocationCoordinate2DMake(lat, lng);
+                    MKMapItem *to_lng_lat = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:lng_lat addressDictionary:nil]];
+                    to_lng_lat.name = name;
+                    [MKMapItem openMapsWithItems:@[currentLocation, to_lng_lat] launchOptions:dict];
+                }else{
+                    CLGeocoder *geo = [[CLGeocoder alloc] init];
+                    [geo geocodeAddressString:address completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+                        
+                        CLPlacemark *endMark = placemarks.firstObject;
+                        MKPlacemark *mkEndMark = [[MKPlacemark alloc]initWithPlacemark:endMark];
+                        MKMapItem *endItem = [[MKMapItem alloc]initWithPlacemark:mkEndMark];
+                        
+                        [MKMapItem openMapsWithItems:@[currentLocation, endItem] launchOptions:dict];
+                    }];
+                }
             }];
             [alert addAction:action];
             

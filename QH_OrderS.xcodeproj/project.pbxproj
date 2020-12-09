@@ -35,7 +35,6 @@
 		3B43569A233DFE0400D38552 /* BaiduPanoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */; };
 		3B4A8D312322BCF100461F07 /* CheckOrderPathViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4A8D2E2322BCF000461F07 /* CheckOrderPathViewController.xib */; };
 		3B4A8D322322BCF100461F07 /* CheckOrderPathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4A8D302322BCF000461F07 /* CheckOrderPathViewController.m */; };
-		3B6E6BFD254ACC0B005DED1B /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B6E6BFC254ACC0B005DED1B /* dist.zip */; };
 		3B77F51C240CB12100F38918 /* XYSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B77F51B240CB12000F38918 /* XYSDK.a */; };
 		3B77F527240CB1CD00F38918 /* SelectionDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B77F51E240CB1CD00F38918 /* SelectionDeviceCell.m */; };
 		3B77F528240CB1CD00F38918 /* SelectionDeviceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B77F520240CB1CD00F38918 /* SelectionDeviceVC.xib */; };
@@ -49,6 +48,7 @@
 		3BD20FA4230A9E73001A52A4 /* ServiceTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD20FA2230A9E73001A52A4 /* ServiceTools.m */; };
 		3BD20FAC230AC9CE001A52A4 /* BMKLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */; };
 		3BD2B549243468280000336B /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD2B548243468280000336B /* libstdc++.6.0.9.tbd */; };
+		3BE035D72580BB0D003BB42C /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3BE035D62580BB0D003BB42C /* dist.zip */; };
 		3BE88E9D232169A8008AC8E7 /* CheckPathService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88E9C232169A8008AC8E7 /* CheckPathService.m */; };
 		3BE88EA3232169FD008AC8E7 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88EA0232169FD008AC8E7 /* LocationModel.m */; };
 		3BE88EA4232169FD008AC8E7 /* RouteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88EA1232169FD008AC8E7 /* RouteAnnotation.m */; };
@@ -127,7 +127,6 @@
 		3B4A8D2F2322BCF000461F07 /* CheckOrderPathViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOrderPathViewController.h; sourceTree = "<group>"; };
 		3B4A8D302322BCF000461F07 /* CheckOrderPathViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOrderPathViewController.m; sourceTree = "<group>"; };
 		3B54E9EF800DFD786F5143B1 /* Pods-QH_OrderS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QH_OrderS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS.debug.xcconfig"; sourceTree = "<group>"; };
-		3B6E6BFC254ACC0B005DED1B /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3B77F511240CB12000F38918 /* XYBLEManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBLEManager.h; sourceTree = "<group>"; };
 		3B77F512240CB12000F38918 /* PosCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosCommand.h; sourceTree = "<group>"; };
 		3B77F513240CB12000F38918 /* ImageTranster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTranster.h; sourceTree = "<group>"; };
@@ -159,6 +158,7 @@
 		3BD20FA3230A9E73001A52A4 /* ServiceTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTools.h; sourceTree = "<group>"; };
 		3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BMKLocationKit.framework; sourceTree = "<group>"; };
 		3BD2B548243468280000336B /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = "libstdc++.6.0.9.tbd"; sourceTree = "<group>"; };
+		3BE035D62580BB0D003BB42C /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3BE88E9B232169A7008AC8E7 /* CheckPathService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckPathService.h; sourceTree = "<group>"; };
 		3BE88E9C232169A8008AC8E7 /* CheckPathService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckPathService.m; sourceTree = "<group>"; };
 		3BE88E9F232169FD008AC8E7 /* RouteAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteAnnotation.h; sourceTree = "<group>"; };
@@ -260,7 +260,7 @@
 			children = (
 				3B0140D1232504D600CBE3F0 /* QH_OrderS.entitlements */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
-				3B6E6BFC254ACC0B005DED1B /* dist.zip */,
+				3BE035D62580BB0D003BB42C /* dist.zip */,
 				3BE88E9E232169FD008AC8E7 /* Custum */,
 				3B2CFB7F231D3E9F0039C483 /* Category */,
 				3BD20FA1230A9E73001A52A4 /* Service */,
@@ -609,7 +609,7 @@
 			files = (
 				3B4A8D312322BCF100461F07 /* CheckOrderPathViewController.xib in Resources */,
 				3B297DC922DD6D760028847C /* LaunchScreen.storyboard in Resources */,
-				3B6E6BFD254ACC0B005DED1B /* dist.zip in Resources */,
+				3BE035D72580BB0D003BB42C /* dist.zip in Resources */,
 				3B297DC622DD6D760028847C /* Assets.xcassets in Resources */,
 				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
 				3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */,
@@ -877,7 +877,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QH_OrderS/QH_OrderS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = AP5995A5FC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -898,7 +898,7 @@
 					"$(PROJECT_DIR)/QH_OrderS/Third/XYSDK",
 					"$(PROJECT_DIR)",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaidongyuan.QHOrderS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -912,7 +912,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QH_OrderS/QH_OrderS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = AP5995A5FC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -933,7 +933,7 @@
 					"$(PROJECT_DIR)/QH_OrderS/Third/XYSDK",
 					"$(PROJECT_DIR)",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kaidongyuan.QHOrderS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

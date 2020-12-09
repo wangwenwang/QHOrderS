@@ -72,9 +72,9 @@
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
-+ (void)TellVueSendLocation:(nullable WKWebView *)webView andAddress:(nullable NSString *)address andLng:(float)lng andLat:(float)lat {
++ (void)TellVueSendLocation:(nullable WKWebView *)webView andName:(nullable NSString *)name andLng:(float)lng andLat:(float)lat andP_c_d_f:(nullable NSString *)p_c_d_f{
     
-    NSString *jsStr = [NSString stringWithFormat:@"SetSendLocation('%@','%f','%f')", address, lng, lat];
+    NSString *jsStr = [NSString stringWithFormat:@"SetSendLocation('%@','%f','%f','%@')", name, lng, lat, p_c_d_f];
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 

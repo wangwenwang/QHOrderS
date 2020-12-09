@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)TellVueContactPeople:(nullable WKWebView *)webView andAddress:(nullable NSString *)name andLng:(nullable NSString *)tel;
 
 /// 告诉Vue用户选择的位置
-+ (void)TellVueSendLocation:(nullable WKWebView *)webView andAddress:(nullable NSString *)address andLng:(float)lng andLat:(float)lat;
++ (void)TellVueSendLocation:(nullable WKWebView *)webView andName:(nullable NSString *)name andLng:(float)lng andLat:(float)lat andP_c_d_f:(nullable NSString *)p_c_d_f;
 @end
 
 NS_ASSUME_NONNULL_END

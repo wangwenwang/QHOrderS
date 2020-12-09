@@ -29,6 +29,7 @@
 @property (assign, nonatomic, getter=isGeocode) BOOL geocode;
 @property (assign, nonatomic, getter=isFirstlocation) BOOL firstlocation;
 @property (copy, nonatomic) NSString *searchKeyword;
+@property (strong, nonatomic) BMKAddressComponent *addressComponent;
 
 @end
 
@@ -129,7 +130,7 @@ static NSString *const kCurrentlocationCellId = @"kCurrentlocationCellId";
         mapY = CGRectGetHeight(self.searchController.searchBar.frame);
     }
 
-    self.mapView.frame   = CGRectMake(0,mapY + kStatusHeight + kNavHeight + 50, screenWidth,mapHeight + 70);
+    self.mapView.frame   = CGRectMake(0,mapY + kStatusHeight + kNavHeight, screenWidth,mapHeight + 70);
     self.mapView.mapScaleBarPosition = CGPointMake(scaleBarToleft,CGRectGetHeight(self.mapView.frame)-scaleBarToBottom-self.mapView.mapScaleBarSize.height);
     [self.redPinBtn setFrame:CGRectMake(0, 0, self.redPinBtn.currentImage.size.width, self.redPinBtn.currentImage.size.height)];
     [self.redPinBtn setCenter:self.mapView.center];
@@ -143,6 +144,7 @@ static NSString *const kCurrentlocationCellId = @"kCurrentlocationCellId";
         self.searchResultController.userCity = result.addressDetail.city;
         self.firstlocation = NO;
     }
+    self.addressComponent =  result.addressDetail;
     [self.nearbylocations removeAllObjects];
     [self.nearbylocations addObjectsFromArray:result.poiList];
     [self.tableView reloadData];
@@ -278,6 +280,12 @@ static NSString *const kCurrentlocationCellId = @"kCurrentlocationCellId";
         [locationDic setObject:[NSString stringWithFormat:@"%f,%f",info.pt.latitude,info.pt.longitude] forKey:@"pt"];
         [locationDic setObject:[NSString stringWithFormat:@"%f",info.pt.longitude] forKey:@"LONGITUDE"];
         [locationDic setObject:[NSString stringWithFormat:@"%f",info.pt.latitude] forKey:@"LATITUDE"];
+        NSString *a = self.addressComponent.province;
+        NSString *b = self.addressComponent.city;
+        NSString *c = self.addressComponent.district;
+        NSString *d = self.addressComponent.streetName;
+        NSString *p_c_d_f = [NSString stringWithFormat:@"[\"%@\",\"%@\",\"%@\",\"%@\"]", a, b, c, d];
+        [locationDic setObject:[NSString stringWithFormat:@"%@", p_c_d_f] forKey:@"p_c_d_f"];
         if ([self.delegate respondsToSelector:@selector(locationPickerViewController:didSelectAddressWithLocationInfo:)]) {
             [self.delegate locationPickerViewController:self didSelectAddressWithLocationInfo:locationDic];
         }

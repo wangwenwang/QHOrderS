@@ -447,7 +447,7 @@
                     LONGITUDE = lnglat.longitude;
                     LATITUDE = lnglat.latitude;
                     NSString *address = [NSString stringWithFormat:@"%f,%f（%@附近）",lnglat.longitude, lnglat.latitude, locationInfo[@"address"]];
-                    [IOSToVue TellVueSendLocation:weakSelf.webView andAddress:address andLng:LONGITUDE andLat:LATITUDE];
+//                    [IOSToVue TellVueSendLocation:weakSelf.webView andAddress:address andLng:LONGITUDE andLat:LATITUDE];
                 };
             });
         }
@@ -585,6 +585,7 @@
             YBLocationPickerViewController *picker = [[YBLocationPickerViewController alloc] init];
             
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:picker];
+            nav.modalPresentationStyle = UIModalPresentationFullScreen;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -596,11 +597,12 @@
                     //返回name address pt pt为坐标
                     double LONGITUDE = [locationInfo[@"LONGITUDE"] doubleValue];
                     double LATITUDE = [locationInfo[@"LATITUDE"] doubleValue];
+                    NSString *name = locationInfo[@"name"];
+                    NSString *p_c_d_f = locationInfo[@"p_c_d_f"];
                     CLLocationCoordinate2D lnglat = [self bdToGaoDe:CLLocationCoordinate2DMake(LATITUDE, LONGITUDE)];
                     LONGITUDE = lnglat.longitude;
                     LATITUDE = lnglat.latitude;
-                    NSString *address = [NSString stringWithFormat:@"%f,%f（%@附近）",lnglat.longitude, lnglat.latitude, locationInfo[@"address"]];
-                    [IOSToVue TellVueSendLocation:weakSelf.webView andAddress:address andLng:LONGITUDE andLat:LATITUDE];
+                    [IOSToVue TellVueSendLocation:weakSelf.webView andName:name andLng:LONGITUDE andLat:LATITUDE andP_c_d_f:p_c_d_f];
                 };
             });
         }

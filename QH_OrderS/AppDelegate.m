@@ -432,7 +432,7 @@
     PKPushRegistry *voipRegistry = [[PKPushRegistry alloc] initWithQueue:mainQueue];
     voipRegistry.delegate = self;
     // Set the push type to VoIP
-    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+//    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
 }
 
 #pragma mark PKPushRegistryDelegate 协议方法
